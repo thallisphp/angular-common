@@ -1,4 +1,4 @@
-angularjs-common-directives
+Angular JS Common
 ===========================
 
-A collection of useful directives for angular js.
+A collection of useful directives, filters, and services for Angular JS.
