@@ -1,43 +1,40 @@
 /*
-// http://stackoverflow.com/a/16428909/1069899
+http://stackoverflow.com/a/15306969/1069899
 
 HTML View:
-<div ng-controller="PostCtrl">
-    <form ng-submit="addPost()">
-        <textarea ng-model="newPost.content" redactor required></textarea>
-        <br />
-        <input type="submit" value="add post">
-    </form>
-
-    {{newPost.content}} <!-- This outputs the raw html with tags -->
-    <br />
-    <div ng-bind-html-unsafe="newPost.content"></div> <!-- This outputs the html -->
-</div>
-
-Controller function:
-$scope.addPost = function() {
-  var post;
-  post = Post.save($scope.newPost);
-  console.log(post);
-  $scope.posts.unshift(post);
-  return $scope.newPost.content = "<p>Add a new post...</p>";
-};
+<textarea ui-redactor='{minHeight: 500}' ng-model='content'></textarea>
 */
-directives.directive("redactor", function() {
+directives.directive("redactor", function(){
   return {
-    require: "?ngModel",
-    link: function($scope, elem, attrs, controller) {
-      return controller.$render = function() {
-        elem.redactor({
-          keyupCallback: function() {
-            return $scope.$apply(controller.$setViewValue(elem.getCode()));
-          },
-          execCommandCallback: function() {
-            return $scope.$apply(controller.$setViewValue(elem.getCode()));
-          },
-        });
-        return elem.setCode(controller.$viewValue);
+    require: "ngModel",
+    link: function(scope, elm, attrs, ngModelCtrl) {
+      var apply, expression, getVal, options, redactor;
+      redactor = null;
+      getVal = function() {
+        return redactor != null ? redactor.getCode() : void 0;
       };
+      apply = function() {
+        ngModelCtrl.$pristine = false;
+        return scope.$apply();
+      };
+      options = {
+        execCommandCallback: apply,
+        keydownCallback: apply,
+        keyupCallback: apply
+      };
+      scope.$watch(getVal, function(newVal) {
+        if (!ngModelCtrl.$pristine) {
+          return ngModelCtrl.$setViewValue(newVal);
+        }
+      });
+      ngModelCtrl.$render = function() {
+        return redactor != null ? redactor.setCode(ngModelCtrl.$viewValue || '') : void 0;
+      };
+      expression = attrs.uiRedactor ? scope.$eval(attrs.uiRedactor) : {};
+      angular.extend(options, expression);
+      return setTimeout(function() {
+        return redactor = elm.redactor(options);
+      });
     }
   };
 });
