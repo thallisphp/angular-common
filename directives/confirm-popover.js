@@ -1,4 +1,4 @@
-directives.directive('confirmButton', function($document, $parse) {
+directives.directive('confirmButton', function($document) {
     return {
     restrict: 'A',
     link: function(scope, element, attrs) {
@@ -45,15 +45,14 @@ directives.directive('confirmButton', function($document, $parse) {
         pop.find('.confirmbutton-yes').click(function(e) {
           dontBubble = false;
 
-          var func = $parse(attrs.confirmButton);
-          func(scope);
+          scope.$apply(function(s) {
+            s.$eval(attrs.confirmButton);
+          });
         });
 
         pop.find('.confirmbutton-no').click(function(e) {
           dontBubble = false;
-
           $document.off('click.confirmbutton.' + buttonId);
-
           element.popover('hide');
         });
 
