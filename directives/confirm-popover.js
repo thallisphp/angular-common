@@ -16,8 +16,8 @@ directives.directive('confirmButton', function($document) {
       html = "<div id=\"button-" + buttonId + "\"> \
         <span class=\"confirmbutton-msg\">" + message + "</span> \
         <br> \
-        <button class=\"confirmbutton-yes btn btn-danger\">" + yep + "</button> \
-        <button class=\"confirmbutton-no btn\">" + nope + "</button> \
+        <button type='button' class=\"confirmbutton-yes btn btn-danger\">" + yep + "</button> \
+        <button type='button' class=\"confirmbutton-no btn\">" + nope + "</button> \
       </div>";
 
       element.popover({
