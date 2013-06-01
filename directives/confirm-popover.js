@@ -1,5 +1,5 @@
 directives.directive('confirmButton', function($document) {
-    return {
+  return {
     restrict: 'A',
     link: function(scope, element, attrs) {
       var buttonId, html, message, nope, title, yep;
@@ -15,6 +15,7 @@ directives.directive('confirmButton', function($document) {
 
       html = "<div id=\"button-" + buttonId + "\"> \
         <span class=\"confirmbutton-msg\">" + message + "</span> \
+        <br> \
         <button class=\"confirmbutton-yes btn btn-danger\">" + yep + "</button> \
         <button class=\"confirmbutton-no btn\">" + nope + "</button> \
       </div>";
