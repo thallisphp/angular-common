@@ -4,7 +4,7 @@
     
     angular.module('common.dateRange', [])
     
-    .directive('dateRange', ['$window', function ($window) {
+    .directive('dateRange', ['$window', '$timeout', function ($window, $timeout) {
         return {
             restrict: 'A',
             scope: {
@@ -16,7 +16,7 @@
                 $(element).daterangepicker(scope.options, function(start, end){
                     $(element).find('span').html(start.format('M/D/YYYY') + ' - ' + end.format('M/D/YYYY'));
     
-                    scope.$apply(function () {
+                    $timeout(function() {
                         scope.onChange({ start: start, end: end });
                     });
                 });
