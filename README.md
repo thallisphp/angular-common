@@ -19,3 +19,6 @@ bower install angular-common
 - Slugify
 - Autoresize
 - Preprocess image upload
+- Stripe
+- Mediaelement
+- Timeago
