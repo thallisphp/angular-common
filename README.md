@@ -15,4 +15,3 @@ A collection of useful directives, filters, and services for Angular JS.
 ```
 bower install angular-common
 ```
-=======
