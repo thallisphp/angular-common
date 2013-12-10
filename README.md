@@ -13,8 +13,6 @@ A collection of useful directives, filters, and services for Angular JS.
 ## Install
 
 ```
-bower install cloudduelng/angular-common
+bower install angular-common
 ```
 =======
-- Register to bower.
->>>>>>> 8686379e2cd16aace089935e8fc05d8b98cde912
