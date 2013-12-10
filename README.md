@@ -8,9 +8,13 @@ A collection of useful directives, filters, and services for Angular JS.
 - Ensure compatibility with bower.
 - Create an upload directive using the preprocess method.
 - Write tests for all directives, services, and filters.
+<<<<<<< HEAD
 
 ## Install
 
 ```
 bower install cloudduelng/angular-common
 ```
+=======
+- Register to bower.
+>>>>>>> 8686379e2cd16aace089935e8fc05d8b98cde912
