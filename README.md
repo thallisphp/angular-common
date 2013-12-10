@@ -24,4 +24,4 @@ For new suggestions please create an issue so I can keep track of all suggestion
 - Autoresize
 - Preprocess image upload
 - Stripe
-- Mediaelement
+- Color Picker
