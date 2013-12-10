@@ -17,6 +17,7 @@ For new suggestions please create an issue so I can keep track of all suggestion
 - Write tests for all directives, services, and filters.
 - Add a list of dependencies.
 - Create a build script to minify files. (Should this rely on a grunt task?)
+- Split all unique directives into own modules.
 
 ## Directives TODO
 - Slugify
