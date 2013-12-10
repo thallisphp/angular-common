@@ -7,7 +7,7 @@
     
     
     //
-    // NOTE 〉Upload
+    // NOTE Upload
     // --------------------------------------------------
     
     .directive('upload', [function() {
@@ -104,57 +104,11 @@
             }
         };
     }])
-    
-    
-    
-    //
-    // NOTE 〉Redactor
-    // --------------------------------------------------
-    
-    // https://github.com/whatever-company/angular-redactor
-    .directive("redactor", ['$timeout', function ($timeout) {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function ($scope, element, attrs, controller) {
-                var instance,
-                    initialised = false;
 
-                // redactor
-                instance = element.redactor({
-                    imageGetJson: '/api/v1/redactor/images',
-                    imageUpload: '/api/v1/redactor/image?resource=true',
-                    fileUpload: '/api/v1/redactor/file',
-                    plugins: ['fontcolor', 'fullscreen'],
-                    syncAfterCallback: function(html) {
-                        // view -> model
-                        if (initialised && controller.$viewValue !== html) {
-                            $timeout(function () {
-                                controller.$setViewValue(html);
-                            });
-                        }
-                    }
-                }).redactor('getObject');
-
-                // model -> view
-                controller.$render = function () {
-                    instance.set(controller.$viewValue || "");
-                    initialised = true;
-                };
-
-                // destroy
-                $scope.$on('$destroy', function () {
-                    instance.destroy();
-                    instance = null;
-                });
-            }
-        };
-    }])
-    
     
 
     //
-    // NOTE 〉Confirm
+    // NOTE Confirm
     // --------------------------------------------------
     
     .directive('confirm', ['$document', function($document) {
@@ -224,7 +178,7 @@
     
     
     //
-    // NOTE 〉Popup
+    // NOTE Popup
     // --------------------------------------------------
     
     .directive('modal', ['Modal', function(Modal){
@@ -291,7 +245,7 @@
     
     
     //
-    // NOTE 〉ngBindHtmlUnsafe
+    // NOTE ngBindHtmlUnsafe
     // --------------------------------------------------
     
     .directive('ngBindHtmlUnsafe', [function() {
@@ -301,93 +255,6 @@
                 element.html(value || '');
             });
         };
-    }])
+    }]);
 
-    
-    
-    //
-    // NOTE 〉nl2br
-    // --------------------------------------------------
-  
-    .filter('nl2br', [function(){
-        return function (value) {
-            if (!value) {
-                return value;
-            }
-    
-            value = value + '';
-    
-            return value.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
-        };
-    }])
-    
-    
-    
-    //
-    // NOTE 〉Truncate
-    // --------------------------------------------------
-
-    /**
-     * Truncate Filter
-     * @Param text
-     * @Param length, default is 10
-     * @Param end, default is "..."
-     * @return string
-     *
-     * Usage
-     * var myText = "This is an example.";
-     *
-     * {{myText|Truncate}}
-     * {{myText|Truncate:5}}
-     * {{myText|Truncate:25:" ->"}}
-     *
-     * Output
-     * "This is..."
-     * "Th..."
-     * "This is an e ->"
-     */
-    .filter('truncate', function () {
-        return function (text, length, end) {
-            if (isNaN(length)) {
-                length = 10;
-            }
-    
-            if (end === undefined) {
-                end = "...";
-            }
-    
-            if (!text) {
-                return text;
-            }
-    
-            if (text.length <= length || text.length - end.length <= length) {
-                return text;
-            } else {
-                return String(text).substring(0, length-end.length) + end;
-            }
-        };
-    })
-
-    
-    
-    //
-    // NOTE 〉Moment
-    // --------------------------------------------------
-    
-    .filter('moment', function() {
-        return function (value, format) {
-            return moment(value).format(format);
-        };
-    })
-    
-    
-    
-    //
-    // NOTE 〉encodeURIComponent
-    // --------------------------------------------------
-    
-    .filter('encodeURIComponent', function() {
-        return window.encodeURIComponent;
-    });
-    
 }());
