@@ -21,9 +21,7 @@ For new suggestions please create an issue so I can keep track of all suggestion
 - Create a sample grunt js file that has all modules listed to be concated so you can pick and choose/have a model to work from.
 
 ## Directives TODO
-- Slugify
 - Autoresize
 - Preprocess image upload
 - Stripe
 - Mediaelement
-- Timeago
