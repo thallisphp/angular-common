@@ -9,13 +9,16 @@ A collection of useful directives, filters, and services for Angular JS.
 bower install angular-common
 ```
 
-## TODO
-- Upload modularized and improved versions.
+## Suggestions 
+For new suggestions please create an issue so I can keep track of all suggestions.
+
+## Repo TODO
 - Ensure compatibility with bower.
 - Write tests for all directives, services, and filters.
-- Add a list of dependencies
+- Add a list of dependencies.
+- Create a build script to minify files. (Should this rely on a grunt task?)
 
-## Directives to add
+## Directives TODO
 - Slugify
 - Autoresize
 - Preprocess image upload
