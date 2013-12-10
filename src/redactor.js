@@ -4,7 +4,6 @@
     
     angular.module('common.redactor', [])
     
-    
     // https://github.com/whatever-company/angular-redactor
     .directive("redactor", ['$timeout', function ($timeout) {
         return {

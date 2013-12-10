@@ -2,7 +2,7 @@
     
     "use strict";
     
-    angular.module('', [])
+    angular.module('common.mediaelement', [])
     
     .directive('mediaelement', [function() {
         return {
