@@ -8,3 +8,4 @@ A collection of useful directives, filters, and services for Angular JS.
 - Ensure compatibility with bower.
 - Create an upload directive using the preprocess method.
 - Write tests for all directives, services, and filters.
+- Register to bower.
