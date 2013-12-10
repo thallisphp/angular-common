@@ -2,7 +2,7 @@
     
     "use strict";
     
-    angular.module('', [])
+    angular.module('common.time', [])
     
     .filter('moment', [function() {
         return function (value, format) {
