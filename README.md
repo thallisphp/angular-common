@@ -48,3 +48,4 @@ For new suggestions please create an issue so I can keep track of all suggestion
 - Stripe
 - Color Picker
 - Add file extension checking for uploading.
+- Change upload to use ng-change 
