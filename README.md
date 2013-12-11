@@ -47,3 +47,4 @@ For new suggestions please create an issue so I can keep track of all suggestion
 - Preprocess image upload
 - Stripe
 - Color Picker
+- Add file extension checking for uploading.
