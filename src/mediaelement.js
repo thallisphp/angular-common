@@ -17,9 +17,9 @@
                         // width of audio player
                         audioWidth: 400,
                         // height of audio player
-                        audioHeight: 30,
+                        audioHeight: 50,
                         // initial volume when the player starts
-                        startVolume: 0.8,
+                        startVolume: 0.5,
                         // useful for <audio> player loops
                         loop: false,
                         // enables Flash and Silverlight to resize to content size
