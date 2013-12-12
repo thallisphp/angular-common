@@ -2,7 +2,7 @@
     
     "use strict";
     
-    angular.module('common', [
+    angular.module('common.master', [
         'common.api',
         'common.confirm',
         'common.dateRange',
