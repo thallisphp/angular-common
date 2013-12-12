@@ -1,0 +1,16 @@
+<div class='row' ng-controller='DemoDragCtrl'>
+    <div class='col-sm-12'>
+        <h1>Drag</h1>
+        <hr>
+        
+        Top: {{ object.top }}
+        <br>
+        Left: {{ object.left }}
+        
+        <div
+            style='height: 100px; width: 100px; background: red; cursor: pointer;'
+            drag
+            drag-top='object.top'
+            drag-left='object.left'></div>
+    </div>
+</div>
