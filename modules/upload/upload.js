@@ -11,6 +11,8 @@
             scope: {
                 upload: '=',
                 ngModel: '=',
+                ngChange: '&',
+                ngError: '&'
             },
             transclude: true,
             template: "<form style='margin: 0;' method='POST' enctype='multipart/form-data'>" +
