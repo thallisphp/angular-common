@@ -20,6 +20,7 @@ bower install angular-common
         'common.api',
         'common.confirm',
         'common.dateRange',
+        'common.drag',
         'common.mediaelement',
         'common.modal',
         'common.ngBindHtmlUnsafe',
@@ -34,18 +35,36 @@ bower install angular-common
 })();
 ```
 
-## Suggestions 
-For new suggestions please create an issue so I can keep track of all suggestions.
+Or instead of writing all of that out you can create a use a single reference by editing the /modules/common/common.js file which contains all the modules.
 
-## Repo TODO
-- Write tests for all modules and add to build script.
-- Add a list of dependencies.
-- Create a build script to build all files for each release.
 
-## Directives TODO
-- Autoresize
-- Preprocess image upload
-- Stripe
-- Color Picker
-- Add file extension checking for uploading.
-- Change upload to use ng-change 
+```
+(function() {
+
+    'use strict';
+
+    angular.module('app', [
+        'common.master'
+    ]);
+    
+})();
+```
+
+## Running The Demo
+
+#### PHP
+
+```
+// From the root of this repo.
+php -S localhost:8000
+```
+In your browser go to <a href='http://localhost:8000'>http://localhost:8000</a>
+
+#### Node
+```
+// server.js coming soon.
+```
+
+## Roadmap
+
+The long term vision for this project is to one by one elimnate all dependencies for this project and create completely angular based modules without the need for including external libraries.
