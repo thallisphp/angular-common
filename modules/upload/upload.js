@@ -10,8 +10,6 @@
             replace: false,
             scope: {
                 upload: '=',
-                uploadOnError: '&',
-                uploadOnSuccess: '&',
                 ngModel: '=',
             },
             transclude: true,
@@ -24,9 +22,6 @@
             "</form>",
             link: function($scope, element, attrs) {
                 $scope.uploadName = attrs.uploadName || "file";
-                $scope.uploadBtnLabel = attrs.uploadBtnLabel || "Choose File";
-                $scope.uploadBtnClass = attrs.uploadBtnClass || "btn";
-                $scope.uploadProgressClass = attrs.uploadProgressClass || "btn";
 
                 $scope.progress = 0;
                 $scope.avatar = '';
@@ -67,7 +62,7 @@
                             $form.removeAttr('action');
 
                             $scope.$apply(function () {
-                                $scope.uploadOnError({
+                                $scope.ngError({
                                     event: event,
                                     responseText: responseText,
                                     statusText: statusText,
@@ -86,7 +81,7 @@
                             }
 
                             $scope.$apply(function () {
-                                $scope.uploadOnSuccess({
+                                $scope.ngChange({
                                     responseText: responseText,
                                 });
 
