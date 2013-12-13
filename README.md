@@ -9,6 +9,11 @@ A collection of useful directives, filters, and services for Angular JS.
 bower install angular-common
 ```
 
+## Docs
+
+** In progress **
+http://clouddueling.github.io/angular-common
+
 ## Usage
 
 ```
