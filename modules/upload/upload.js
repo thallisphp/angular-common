@@ -4,7 +4,7 @@
     
     angular.module('common.upload', [])
     
-    .directive('upload', [function() {
+    .directive('upload', ['$timeout', function($timeout) {
         return {
             restrict: 'EA',
             replace: false,
@@ -63,7 +63,7 @@
                             // remove the action attribute from the form
                             $form.removeAttr('action');
 
-                            scope.$apply(function () {
+                            $timeout(function () {
                                 scope.ngError({
                                     event: event,
                                     responseText: responseText,
@@ -82,11 +82,8 @@
                                 scope.ngModel = data.filename;
                             }
 
-                            scope.$apply(function () {
-                                scope.ngChange({
-                                    responseText: responseText,
-                                });
-
+                            $timeout(function () {
+                                scope.ngChange({ responseText: responseText });
                                 scope.progress = 0;
                             });
                         },
