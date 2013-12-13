@@ -22,11 +22,11 @@
                     "<strong ng-show='progress > 0' ng-class='{ \"text-success\": progress == 100, \"text-info\": progress < 100 }' style='width: {{ progress }}%'>{{ progress }}%</strong>" +
                 "</span>" +
             "</form>",
-            link: function($scope, element, attrs) {
-                $scope.uploadName = attrs.uploadName || "file";
+            link: function(scope, element, attrs) {
+                scope.uploadName = attrs.uploadName || "file";
 
-                $scope.progress = 0;
-                $scope.avatar = '';
+                scope.progress = 0;
+                scope.avatar = '';
 
                 element.find('.fake-uploader').click(function() {
                     element.find('input[type="file"]').click();
@@ -44,27 +44,27 @@
                         return false;
                     }
 
-                    $form.attr('action', $scope.upload);
+                    $form.attr('action', scope.upload);
 
-                    $scope.$apply(function() {
-                        $scope.progress = 0;
+                    scope.$apply(function() {
+                        scope.progress = 0;
                     });
 
                     $form.ajaxSubmit({
                         type: 'POST',
                         dataType: 'json',
                         uploadProgress: function(event, position, total, percentComplete) {
-                            $scope.$apply(function() {
+                            scope.$apply(function() {
                                 // upload the progress bar during the upload
-                                $scope.progress = percentComplete;
+                                scope.progress = percentComplete;
                             });
                         },
                         error: function(event, statusText, responseText, form) {
                             // remove the action attribute from the form
                             $form.removeAttr('action');
 
-                            $scope.$apply(function () {
-                                $scope.ngError({
+                            scope.$apply(function () {
+                                scope.ngError({
                                     event: event,
                                     responseText: responseText,
                                     statusText: statusText,
@@ -79,15 +79,15 @@
                             var data = angular.fromJson(responseText);
 
                             if (data.filename !== undefined) {
-                                $scope.ngModel = data.filename;
+                                scope.ngModel = data.filename;
                             }
 
-                            $scope.$apply(function () {
-                                $scope.ngChange({
+                            scope.$apply(function () {
+                                scope.ngChange({
                                     responseText: responseText,
                                 });
 
-                                $scope.progress = 0;
+                                scope.progress = 0;
                             });
                         },
                     });
