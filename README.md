@@ -58,18 +58,19 @@ Or instead of writing all of that out you can create a use a single reference by
 
 ## Running The Demo
 
-#### PHP
 
+1. PHP
 ```
-// From the root of this repo.
-php -S localhost:8000
+php -S localhost:8888
 ```
-In your browser go to <a href='http://localhost:8000'>http://localhost:8000</a>
 
-#### Node
+2. Node
 ```
-// server.js coming soon.
+node server.js
 ```
+
+3. <a href='http://localhost:8000'>http://localhost:8888</a>
+
 
 ## Roadmap
 
