@@ -26,8 +26,11 @@
                     connectToSortable: attrs.draggableTarget,
                     helper: "clone",
                     revert: "invalid",
-                    start: function(event, ui) {
+                    start: function() {
                         DragDropHandler.dragObject = scope.draggable;
+                    },
+                    stop: function() {
+                        DragDropHandler.dragObject = undefined;   
                     }
                 });
 
