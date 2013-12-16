@@ -56,7 +56,7 @@
             "   </li>\n" +
         "</ul>";
         
-        $scope.updateObjects = function(id, from, to) {
+        $scope.updateObjects = function(from, to) {
             $scope.items.splice(to, 0, $scope.items.splice(from, 1)[0]);
         };
 
