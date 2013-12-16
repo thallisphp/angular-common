@@ -10,11 +10,11 @@
             addObject: function(object, objects, to) {
                 objects.splice(to, 0, object);  
             },
-            updateObjects: function(objects, to, from) {
+            moveObject: function(objects, from, to) {
                 objects.splice(to, 0, objects.splice(from, 1)[0]);
             }
         };
-    }])
+    }])    
     
     .directive('draggable', ['DragDropHandler', function(DragDropHandler) {
         return {
@@ -42,13 +42,13 @@
     .directive('droppable', ['DragDropHandler', function(DragDropHandler) {
         return {
             scope: {
+                droppable: '=',
                 ngUpdate: '&',
                 ngCreate: '&'
             },
             link: function(scope, element, attrs){
                 element.sortable();
                 element.disableSelection();
-
                 element.on("sortdeactivate", function(event, ui) { 
                     var from = angular.element(ui.item).scope().$index;
                     var to = element.children().index(ui.item);
@@ -56,6 +56,7 @@
                     if (to >= 0 ){
                         scope.$apply(function(){
                             if (from >= 0) {
+                                DragDropHandler.moveObject(scope.droppable, from, to);
                                 scope.ngUpdate({
                                     from: from,
                                     to: to

@@ -57,7 +57,8 @@
         "</ul>";
         
         $scope.updateObjects = function(from, to) {
-            DragDropHandler.updateObjects($scope.items, to, from);
+            var itemIds = _.pluck($scope.items, 'id');
+            console.log(itemIds);
         };
 
         $scope.createObject = function(object, to) {
