@@ -1,0 +1,12 @@
+{
+    "name": "angular.common",
+    "title": "Angular/Common",
+    "description": "Common and simple modules needed to create a professional application.",
+    "homepage": "https://github.com/clouddueling/angular-common",
+    "version": "0.1.0",
+    "author": "Michael Calkins <michael@clouddueling.com> (https://www.clouddueling.com)",
+    "license": "MIT",
+    "engines": {
+        "angularjs": ">=1.2.3"
+    }
+}
