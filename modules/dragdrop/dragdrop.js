@@ -6,7 +6,7 @@
     
     .factory('DragDropHandler', [function() {
         return {
-            dragObject: {},
+            dragObject: undefined,
             addObject: function(object, objects, to) {
                 objects.splice(to, 0, object);  
             },
