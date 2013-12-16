@@ -47,7 +47,7 @@
             "</ul>\n\n" +
 
             "<ul\n" +
-            "   droppable\n" +
+            "   droppable='items'\n" +
             "   ng-update='updateObjects(id, from, to)'\n" +
             "   ng-create='createObject(object, to)'\n" +
             "   id='sortable'>\n" +
