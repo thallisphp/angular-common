@@ -1,5 +1,5 @@
-Angular JS Common
-===========================
+#Angular JS Common
+---
 
 A collection of useful directives, filters, and services for Angular JS.
 
@@ -7,9 +7,7 @@ A collection of useful directives, filters, and services for Angular JS.
 
 [Docs and Examples (In progress)](http://clouddueling.github.io/angular-common/)
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
-[![Build Status](https://travis-ci.org/clouddueling/angular-common.png)](https://travis-ci.org/clouddueling/angular-common)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge") [![Build Status](https://travis-ci.org/clouddueling/angular-common.png)](https://travis-ci.org/clouddueling/angular-common)
 
 
 ## Install
@@ -36,6 +34,7 @@ bower install angular-common
         'common.ngBindHtmlUnsafe',
         'common.print',
         'common.redactor',
+        'common.skype',
         'common.strings',
         'common.time',
         'common.upload',
@@ -60,8 +59,6 @@ Or instead of writing all of that out you can create a use a single reference by
 })();
 ```
 
-
-
 ## Running The Demo
 
 ***Run these commands from the root of the repo.***
@@ -77,8 +74,6 @@ php -S localhost:8888
 ```
 
 <a href='http://localhost:8000'>http://localhost:8888</a>
-
-
 
 ## Roadmap
 
