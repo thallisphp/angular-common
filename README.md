@@ -7,6 +7,11 @@ A collection of useful directives, filters, and services for Angular JS.
 
 [Docs and Examples (In progress)](http://clouddueling.github.io/angular-common/)
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+[![Build Status](https://travis-ci.org/clouddueling/angular-common.png)](https://travis-ci.org/clouddueling/angular-common)
+
+
 ## Install
 
 ```
@@ -71,7 +76,6 @@ node server.js
 php -S localhost:8888
 ```
 
-
 <a href='http://localhost:8000'>http://localhost:8888</a>
 
 
@@ -79,7 +83,3 @@ php -S localhost:8888
 ## Roadmap
 
 The long term vision for this project is to one by one elimnate all dependencies for this project and create completely angular based modules without the need for including external libraries.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

@@ -8,7 +8,7 @@
         return {
             dragObject: undefined,
             addObject: function(object, objects, to) {
-                objects.splice(to, 0, object);  
+                objects.splice(to, 0, object);
             },
             moveObject: function(objects, from, to) {
                 objects.splice(to, 0, objects.splice(from, 1)[0]);
