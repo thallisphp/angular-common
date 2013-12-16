@@ -33,6 +33,7 @@ http://clouddueling.github.io/angular-common
         'common.confirm',
         'common.dateRange',
         'common.drag',
+        'common.dragdrop',
         'common.mediaelement',
         'common.modal',
         'common.ngBindHtmlUnsafe',
@@ -68,17 +69,18 @@ Or instead of writing all of that out you can create a use a single reference by
 
 ***Run these commands from the root of the repo.***
 
-1. PHP
-```
-php -S localhost:8888
-```
-
-2. Node
+- Node
 ```
 node server.js
 ```
 
-3. <a href='http://localhost:8000'>http://localhost:8888</a>
+- PHP
+```
+php -S localhost:8888
+```
+
+
+<a href='http://localhost:8000'>http://localhost:8888</a>
 
 
 

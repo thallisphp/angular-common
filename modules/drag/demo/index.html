@@ -1,16 +1,17 @@
+<h3>drag</h3>
+
 <div class='row' ng-controller='DemoDragCtrl'>
-    <div class='col-sm-12'>
-        <h1>Drag</h1>
-        <hr>
-        
+    <div class='col-sm-6'>        
         Top: <code>{{ object.top }}</code>
         <br>
         Left: <code>{{ object.left }}</code>
-        
+
         <div
             style='height: 100px; width: 100px; background: red; cursor: pointer;'
-            drag
-            drag-top='object.top'
-            drag-left='object.left'></div>
+            drag='object'></div>
+    </div>
+    
+    <div class='col-sm-6'>
+        <pre>{{ codeExample }}</pre>
     </div>
 </div>

@@ -9,15 +9,14 @@
     .directive('drag', ['$timeout', function ($timeout) {
         return {
             scope: {
-                dragTop: '=',
-                dragLeft: '='
+                drag: '=',
             },
             link: function (scope, element) {
                 $(element).draggable({
                     stop: function(event, ui) {
                         $timeout(function() {
-                            scope.dragTop = ui.position.top;
-                            scope.dragLeft = ui.position.left;
+                            scope.drag.top = ui.position.top;
+                            scope.drag.left = ui.position.left;
                         });
                     }
                 });

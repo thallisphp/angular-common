@@ -1,0 +1,33 @@
+<h3>dragndrop</h3>
+
+<div class='row' ng-controller='DemoDragDropCtrl'>
+    <div class='col-sm-6'>        
+        <ul class='unstyled-list'>
+            <li 
+                class="ui-state-highlight"
+                ng-repeat='object in objects'
+                draggable="{{ object.id }}"
+                draggable-target='#sortable'>
+                {{ object.name }}
+            </li>
+        </ul>
+        
+        <ul 
+            droppable
+            ng-update='updateObjects(id, from, to)'
+            ng-create='createObject(id, to)'
+            id="sortable">
+            <li 
+                class="ui-state-default" 
+                ng-repeat="item in items track by item.id">
+                {{ $index }}: {{ item.id }} - {{ item.name }}
+            </li>
+        </ul>
+        
+        <pre>{{ items | json }}</pre>
+    </div>
+    
+    <div class='col-sm-6'>
+        {{ codeExample }}
+    </div>
+</div>
