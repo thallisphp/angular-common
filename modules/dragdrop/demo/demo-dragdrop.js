@@ -6,7 +6,7 @@
         'common.dragdrop'
     ])
 
-    .controller('DemoDragDropCtrl', ['$scope', function($scope) {
+    .controller('DemoDragDropCtrl', ['$scope', 'DragDropHandler', function($scope, DragDropHandler) {
         $scope.items = [
             {
                 id: 3,
@@ -40,16 +40,16 @@
         $scope.codeExample = "<ul>\n" +
             "   <li\n" +
             "       ng-repeat='object in objects'\n" +
-            "       draggable='object.id'\n" +
+            "       draggable='object'\n" +
             "       draggable-target='#sortable'>\n" +
             "       {{ object.name }}\n" +
             "   </li>\n" +
             "</ul>\n\n" +
-        
+
             "<ul\n" +
             "   droppable\n" +
             "   ng-update='updateObjects(id, from, to)'\n" +
-            "   ng-create='createObject(id, to)'\n" +
+            "   ng-create='createObject(object, to)'\n" +
             "   id='sortable'>\n" +
             "   <li ng-repeat='item in items track by item.id'>\n"+
             "       {{ item.name }}\n" +
@@ -57,15 +57,13 @@
         "</ul>";
         
         $scope.updateObjects = function(from, to) {
-            $scope.items.splice(to, 0, $scope.items.splice(from, 1)[0]);
+            DragDropHandler.updateObjects($scope.items, to, from);
         };
 
-        $scope.createObject = function(id, to) {
-            var object = _.findWhere($scope.objects, { id: +id });
+        $scope.createObject = function(object, to) {
             var newItem = angular.copy(object);
             newItem.id = Math.ceil(Math.random() * 1000);
-
-            $scope.items.splice(to, 0, newItem);
+            DragDropHandler.addObject(newItem, $scope.items, to);
         };
         
         $scope.deleteItem = function(itemId) {

@@ -4,13 +4,31 @@
     
     angular.module('common.dragdrop', [])
     
-    .directive('draggable', [function(){
+    .factory('DragDropHandler', [function() {
         return {
+            dragObject: {},
+            addObject: function(object, objects, to) {
+                objects.splice(to, 0, object);  
+            },
+            updateObjects: function(objects, to, from) {
+                objects.splice(to, 0, objects.splice(from, 1)[0]);
+            }
+        };
+    }])
+    
+    .directive('draggable', ['DragDropHandler', function(DragDropHandler) {
+        return {
+            scope: {
+                draggable: '=' 
+            },
             link: function(scope, element, attrs){          
                 element.draggable({
                     connectToSortable: attrs.draggableTarget,
                     helper: "clone",
-                    revert: "invalid"
+                    revert: "invalid",
+                    start: function(event, ui) {
+                        DragDropHandler.dragObject = scope.draggable;
+                    }
                 });
 
                 element.disableSelection();
@@ -18,7 +36,7 @@
         };
     }])
 
-    .directive('droppable', [function(){
+    .directive('droppable', ['DragDropHandler', function(DragDropHandler) {
         return {
             scope: {
                 ngUpdate: '&',
@@ -41,7 +59,7 @@
                                 });
                             } else {
                                 scope.ngCreate({
-                                    id: ui.item.attr('draggable'),
+                                    object: DragDropHandler.dragObject,
                                     to: to
                                 });
 
