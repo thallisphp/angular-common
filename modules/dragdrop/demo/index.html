@@ -21,13 +21,16 @@
                 class="ui-state-default" 
                 ng-repeat="item in items track by item.id">
                 {{ $index }}: {{ item.id }} - {{ item.name }}
+                <button 
+                    ng-click='deleteItem(item.id)'
+                    class='btn btn-xs pull-right btn-danger'>X</button>
             </li>
         </ul>
         
         <pre>{{ items | json }}</pre>
     </div>
-    
+
     <div class='col-sm-6'>
-        {{ codeExample }}
+        <pre>{{ codeExample }}</pre>
     </div>
 </div>

@@ -37,6 +37,25 @@
             }
         ];
 
+        $scope.codeExample = "<ul>\n" +
+            "   <li\n" +
+            "       ng-repeat='object in objects'\n" +
+            "       draggable='object.id'\n" +
+            "       draggable-target='#sortable'>\n" +
+            "       {{ object.name }}\n" +
+            "   </li>\n" +
+            "</ul>\n\n" +
+        
+            "<ul\n" +
+            "   droppable\n" +
+            "   ng-update='updateObjects(id, from, to)'\n" +
+            "   ng-create='createObject(id, to)'\n" +
+            "   id='sortable'>\n" +
+            "   <li ng-repeat='item in items track by item.id'>\n"+
+            "       {{ item.name }}\n" +
+            "   </li>\n" +
+        "</ul>";
+        
         $scope.updateObjects = function(id, from, to) {
             $scope.items.splice(to, 0, $scope.items.splice(from, 1)[0]);
         };
@@ -47,6 +66,12 @@
             newItem.id = Math.ceil(Math.random() * 1000);
 
             $scope.items.splice(to, 0, newItem);
+        };
+        
+        $scope.deleteItem = function(itemId) {
+            $scope.items = _.reject($scope.items, function(item) {
+                return item.id == itemId; 
+            });
         };
     }])
     

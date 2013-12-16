@@ -40,7 +40,7 @@
     
     <body ng-controller='MainCtrl'>
         <div class='left-column text-center'>
-            <h2>Angular.Common</h2>
+            <h2>Angular/Common</h2>
             <div class="btn-group-vertical col-sm-12">
                 <a 
                     ng-repeat='module in modules'
@@ -62,6 +62,11 @@
             </div>
         </div>
         
+        <script language='javascript' type='text/javascript' 
+    src='http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js' />
+        <script language='javascript'  type='text/javascript' 
+    src='http://google-code-prettify.googlecode.com/svn/trunk/src/lang-css.js'/>
+        
         <script src='//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js'></script>
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -75,5 +80,22 @@
         
         <script src="/modules/dragdrop/demo/demo-dragdrop.js"></script>
         <script src="/modules/drag/demo/demo-drag.js"></script>
+        
+        <script type='text/javascript'>
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+addLoadEvent(prettyPrint);
+</script>
     </body>
 </html>
