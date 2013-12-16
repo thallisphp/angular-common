@@ -3,7 +3,7 @@ Angular JS Common
 
 A collection of useful directives, filters, and services for Angular JS.
 
-
+[Follow @michaeljcalkins for updates.](https://twitter.com/michaeljcalkins)
 
 ## Install
 
