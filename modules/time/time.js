@@ -1,22 +1,22 @@
 (function() {
-    
+
     "use strict";
-    
+
     angular.module('common.time', [])
-    
+
     .filter('moment', [function() {
         return function (value, format) {
             return moment(value).format(format);
         };
     }])
-    
+
     .filter('fromNow', [function() {
         return function(date) {
             return moment(date).fromNow();
         };
     }])
-    
-    .filter('timeAgo', [function() {
+
+    .filter('smallFromNow', [function() {
         return function(input, p_allowFuture) {
             var substitute = function (stringOrFunction, number, strings) {
                     var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, dateDifference) : stringOrFunction;
@@ -52,18 +52,18 @@
                 days = hours / 24,
                 years = days / 365,
                 separator = strings.wordSeparator === undefined ?  " " : strings.wordSeparator,
-    
+
                 // var strings = this.settings.strings;
                 prefix = strings.prefixAgo,
                 suffix = strings.suffixAgo;
-    
+
             if (allowFuture) {
                 if (dateDifference < 0) {
                     prefix = strings.prefixFromNow;
                     suffix = strings.suffixFromNow;
                 }
             }
-    
+
             words = seconds < 45 && substitute(strings.seconds, Math.round(seconds), strings) ||
             seconds < 90 && substitute(strings.minute, 1, strings) ||
             minutes < 45 && substitute(strings.minutes, Math.round(minutes), strings) ||
@@ -75,9 +75,9 @@
             days < 365 && substitute(strings.months, Math.round(days / 30), strings) ||
             years < 1.5 && substitute(strings.year, 1, strings) ||
             substitute(strings.years, Math.round(years), strings);
-    
+
             return $.trim([prefix, words, suffix].join(separator));
         };
     }]);
-    
+
 })();

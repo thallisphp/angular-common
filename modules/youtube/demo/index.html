@@ -1,8 +1,9 @@
 <h3>youtube</h3>
 
-<div class='row' ng-controller='DemoApiCtrl'>
+<div class='row' ng-controller='DemoYoutubeCtrl'>
     <div class='col-sm-6'>
-
+        <img src='{{ youtubeUrl | youtubeImage }}'>
+        <iframe frameborder='0' ng-src='{{ youtubeUrl | youtubeIframe }}'></iframe>
     </div>
 
     <div class='col-sm-6'>

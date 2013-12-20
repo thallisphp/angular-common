@@ -21,6 +21,15 @@
         'demo.youtube'
     ])
 
+    .config(function($sceProvider) {
+        $sceProvider.enabled(false);
+    })
+
+    .config(['$sceProvider', '$compileProvider', function($sceProvider, $compileProvider) {
+        $sceProvider.enabled(false);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|skype):/) ;
+    }])
+
     .controller('MainCtrl', ['$scope', function($scope) {
         $scope.modules = [
             'api',
@@ -39,6 +48,6 @@
             'upload',
             'youtube'
         ];
-    }])
+    }]);
 
-;})();
+})();
