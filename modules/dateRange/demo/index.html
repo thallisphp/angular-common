@@ -1,0 +1,20 @@
+<h3>dateRange</h3>
+
+<div class='row' ng-controller='DemoDateRangeCtrl'>
+    <div class='col-sm-6'>
+        <p>
+            <button
+                class='btn btn-default'
+                date-range='dateRangeOptions'
+                ng-update='updateDates(start, end)'></button>
+        </p>
+
+        <p>
+            {{ startDate }} - {{ endDate }}
+        </p>
+    </div>
+
+    <div class='col-sm-6'>
+        <pre>{{ codeExample }}</pre>
+    </div>
+</div>

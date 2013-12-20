@@ -1,0 +1,19 @@
+<h3>confirm</h3>
+
+<div class='row' ng-controller='DemoConfirmCtrl'>
+    <div class='col-sm-6'>
+        <button
+            class='btn btn-default'
+            confirm='deleteObject(objectId)'
+            confirm-title='Delete this object?'
+            confirm-placement='left'>
+            Click Me
+        </button>
+
+        <p>{{ objectDeleted }}</p>
+    </div>
+
+    <div class='col-sm-6'>
+        <pre>{{ codeExample }}</pre>
+    </div>
+</div>

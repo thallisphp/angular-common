@@ -1,15 +1,17 @@
 (function() {
-    
+
     "use strict";
-    
+
     angular.module('angular-common', [
+        'common.master',
+        'demo.confirm',
+        'demo.daterange',
         'demo.drag',
         'demo.dragdrop'
     ])
 
     .controller('MainCtrl', ['$scope', function($scope) {
         $scope.modules = [
-            'common',
             'api',
             'confirm',
             'dateRange',
@@ -26,5 +28,5 @@
             'youtube'
         ];
     }])
-    
+
 ;})();

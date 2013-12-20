@@ -1,9 +1,9 @@
 (function() {
-    
+
     "use strict";
-    
+
     angular.module('common.dragdrop', [])
-    
+
     .factory('DragDropHandler', [function() {
         return {
             dragObject: undefined,
@@ -14,14 +14,14 @@
                 objects.splice(to, 0, objects.splice(from, 1)[0]);
             }
         };
-    }])    
-    
+    }])
+
     .directive('draggable', ['DragDropHandler', function(DragDropHandler) {
         return {
             scope: {
-                draggable: '=' 
+                draggable: '='
             },
-            link: function(scope, element, attrs){          
+            link: function(scope, element, attrs){
                 element.draggable({
                     connectToSortable: attrs.draggableTarget,
                     helper: "clone",
@@ -30,7 +30,7 @@
                         DragDropHandler.dragObject = scope.draggable;
                     },
                     stop: function() {
-                        DragDropHandler.dragObject = undefined;   
+                        DragDropHandler.dragObject = undefined;
                     }
                 });
 
@@ -49,10 +49,10 @@
             link: function(scope, element, attrs){
                 element.sortable();
                 element.disableSelection();
-                element.on("sortdeactivate", function(event, ui) { 
+                element.on("sortdeactivate", function(event, ui) {
                     var from = angular.element(ui.item).scope().$index;
                     var to = element.children().index(ui.item);
-                    
+
                     if (to >= 0 ){
                         scope.$apply(function(){
                             if (from >= 0) {
