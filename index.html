@@ -12,6 +12,11 @@
                 box-sizing:border-box;
             }
 
+            html, body {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
             section {
                 padding: 0 30px 30px 30px;
                 margin: 0 0 30px 0;
@@ -58,6 +63,10 @@
         <div class='main-column'>
             <div class='row'>
                 <div class='col-sm-12'>
+                    <section id='api'>
+                        <div ng-include='"modules/api/demo/index.html"'></div>
+                    </section>
+
                     <section id='confirm'>
                         <div ng-include='"modules/confirm/demo/index.html"'></div>
                     </section>
@@ -72,6 +81,42 @@
 
                     <section id='dragdrop'>
                         <div ng-include='"modules/dragdrop/demo/index.html"'></div>
+                    </section>
+
+                    <section id='mediaelement'>
+                        <div ng-include='"modules/mediaelement/demo/index.html"'></div>
+                    </section>
+
+                    <section id='modal'>
+                        <div ng-include='"modules/modal/demo/index.html"'></div>
+                    </section>
+
+                    <section id='ngBindHtmlUnsafe'>
+                        <div ng-include='"modules/ngBindHtmlUnsafe/demo/index.html"'></div>
+                    </section>
+
+                    <section id='print'>
+                        <div ng-include='"modules/print/demo/index.html"'></div>
+                    </section>
+
+                    <section id='redactor'>
+                        <div ng-include='"modules/redactor/demo/index.html"'></div>
+                    </section>
+
+                    <section id='strings'>
+                        <div ng-include='"modules/strings/demo/index.html"'></div>
+                    </section>
+
+                    <section id='time'>
+                        <div ng-include='"modules/time/demo/index.html"'></div>
+                    </section>
+
+                    <section id='upload'>
+                        <div ng-include='"modules/upload/demo/index.html"'></div>
+                    </section>
+
+                    <section id='youtube'>
+                        <div ng-include='"modules/youtube/demo/index.html"'></div>
                     </section>
                 </div>
             </div>
@@ -104,9 +149,20 @@
 
         <script src='app.js'></script>
 
+        <script src="modules/api/demo/demo-api.js"></script>
         <script src="modules/confirm/demo/demo-confirm.js"></script>
         <script src="modules/dateRange/demo/demo-daterange.js"></script>
-        <script src="modules/dragdrop/demo/demo-dragdrop.js"></script>
         <script src="modules/drag/demo/demo-drag.js"></script>
+        <script src="modules/dragdrop/demo/demo-dragdrop.js"></script>
+        <script src="modules/mediaelement/demo/demo-mediaelement.js"></script>
+        <script src="modules/modal/demo/demo-modal.js"></script>
+        <script src="modules/ngBindHtmlUnsafe/demo/demo-ngbindhtmlunsafe.js"></script>
+        <script src="modules/print/demo/demo-print.js"></script>
+        <script src="modules/redactor/demo/demo-redactor.js"></script>
+        <script src="modules/skype/demo/demo-skype.js"></script>
+        <script src="modules/strings/demo/demo-strings.js"></script>
+        <script src="modules/time/demo/demo-time.js"></script>
+        <script src="modules/upload/demo/demo-upload.js"></script>
+        <script src="modules/youtube/demo/demo-youtube.js"></script>
     </body>
 </html>

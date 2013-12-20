@@ -1,0 +1,21 @@
+<h3>api</h3>
+
+<div class='row' ng-controller='DemoApiCtrl'>
+    <div class='col-sm-6'>
+        <button
+            ng-click='loadRandomUser()'
+            class='btn btn-default'>
+            Load Random User
+        </button>
+
+        <input type='text' ng-model='results'>
+
+        <hr>
+
+        <pre>{{ randomUsers | json }}</pre>
+    </div>
+
+    <div class='col-sm-6'>
+        <pre>{{ codeExample }}</pre>
+    </div>
+</div>

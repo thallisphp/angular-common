@@ -1,70 +1,70 @@
 (function() {
-    
-    "use strict";
-    
-    angular.module('common.strings', [])    
 
-    
-    
+    "use strict";
+
+    angular.module('common.strings', [])
+
+
+
     //
     // NOTE Title Case
     // --------------------------------------------------
-    
+
     .filter('titleCase', function() {
         var titleCaseFilter = function(input) {
             if (!input) {
                 return;
             }
-    
+
             var words = input.split(' ');
             for (var i = 0; i < words.length; i++) {
                 words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
             }
-    
+
             return words.join(' ');
         };
 
         return titleCaseFilter;
     })
-    
-    
-    
+
+
+
     //
     // NOTE Lower Case
     // --------------------------------------------------
-    
+
     .filter('lowerCase', function() {
         var titleCaseFilter = function(input) {
             var words = input.split(' ');
             for (var i = 0; i < words.length; i++) {
                 words[i] = words[i].charAt(0).toLowerCase() + words[i].slice(1);
             }
-    
+
             return words.join(' ');
         };
         return titleCaseFilter;
     })
-    
-    
-    
+
+
+
     //
     // NOTE nl2br
     // --------------------------------------------------
-  
+
     .filter('nl2br', [function(){
         return function (value) {
             if (!value) {
                 return value;
             }
-    
+
             value = value + '';
-    
+
             return value.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br>$2');
         };
     }])
-    
-    
-    
+
+
+
     //
     // NOTE Truncate
     // --------------------------------------------------
@@ -93,15 +93,15 @@
             if (isNaN(length)) {
                 length = 10;
             }
-    
+
             if (end === undefined) {
                 end = "...";
             }
-    
+
             if (!text) {
                 return text;
             }
-    
+
             if (text.length <= length || text.length - end.length <= length) {
                 return text;
             } else {
@@ -111,21 +111,21 @@
     })
 
 
-    
+
     //
     // NOTE encodeURIComponent
     // --------------------------------------------------
-    
+
     .filter('encodeURIComponent', function() {
         return window.encodeURIComponent;
     })
-    
-    
-    
+
+
+
     //
     // NOTE 〉Slugify
     // --------------------------------------------------
-    
+
     .directive('slugify', ['$parse', function($parse) {
         return {
             restrict: 'A',
@@ -135,8 +135,8 @@
                     if (!value) {
                         return;
                     }
-    
-                    $parse(attrs.ngModel).assign(scope, value.toLowerCase().replace(/[^a-z0-9\-\s]/g, '-'));
+
+                    $parse(attrs.ngModel).assign(scope, value.toLowerCase().replace(/[\W\s]/g, '-'));
                 });
             }
         };
