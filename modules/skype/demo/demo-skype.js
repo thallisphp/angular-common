@@ -6,7 +6,9 @@
 
     .controller('DemoSkypeCtrl', ['$scope', function($scope) {
         $scope.phoneNumber = "(425) 897 - 7897";
-        $scope.codeExample = "";
+        $scope.codeExample = "<a href='{{ phoneNumber | skype }}'>\n" +
+        "   {{ phoneNumber | skype }}\n" +
+        "</a>";
     }]);
 
 })();
