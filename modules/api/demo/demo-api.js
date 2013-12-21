@@ -16,7 +16,15 @@
             });
         };
 
-        $scope.codeExample = "";
+        $scope.codeExample = "Api.setBase('/api/v1/');\n\n" +
+
+        "$scope.loadUser = function(userId, filters) {\n" +
+        "   Api.get('user/' + userId, {\n" +
+        "       filters: filters\n" +
+        "   }).success(function(data) {\n" +
+        "       $scope.data = data;\n" +
+        "   });\n" +
+        "};";
     }]);
 
 })();

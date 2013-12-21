@@ -2,15 +2,15 @@
 
 <div class='row' ng-controller='DemoApiCtrl'>
     <div class='col-sm-6'>
-        <button
-            ng-click='loadRandomUser()'
-            class='btn btn-default'>
-            Load Random User
-        </button>
+        <p>
+            <button
+                ng-click='loadRandomUser()'
+                class='btn btn-default'>
+                Load Random User
+            </button>
+        </p>
 
-        <hr>
-
-        <pre>{{ randomUsers | json }}</pre>
+        <pre ng-show='randomUsers'>{{ randomUsers | json }}</pre>
     </div>
 
     <div class='col-sm-6'>
