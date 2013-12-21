@@ -1,27 +1,26 @@
 (function() {
-    
+
     "use strict";
-    
+
     angular.module('common.print', [])
-    
-    .directive('print', [function() {
+
+    .directive('print', ['$timeout', function($timeout) {
         return {
             link: function(scope, element, attrs) {
                 function getHtml() {
-                    return $(attrs.cdPrint).html();
+                    return $(attrs.print).html();
                 }
 
                 element.click(function() {
                     var data = getHtml();
+                    var mywindow = window.open('', attrs.printTitle, 'height=400,width=800');
 
-                    var mywindow = window.open('', attrs.cdPrintTitle, 'height=400,width=800');
-
-                    mywindow.document.write('<html><head><title>' + attrs.cdPrintTitle + '</title>');
+                    mywindow.document.write('<html><head><title>' + attrs.printTitle + '</title>');
                     mywindow.document.write('<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css" />');
                     mywindow.document.write('</head><body >' + data + '</body></html>');
-
                     mywindow.print();
-                    setTimeout(function() {
+
+                    $timeout(function() {
                         mywindow.close();
                     }, 10);
 
@@ -30,5 +29,5 @@
             }
         };
     }]);
-    
+
 })();
