@@ -642,7 +642,7 @@
                 return value;
             }
 
-            value = value.replace(/\D/g, '') + "";
+            value = String(value).replace(/\D/g, '');
 
             if (value[0] === '1') {
                 value = "+" + value;
