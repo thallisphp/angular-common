@@ -2,7 +2,15 @@
 
 <div class='row' ng-controller='DemoMediaelementCtrl'>
     <div class='col-sm-6'>
-        <video mediaelement src=''></video>
+        <video
+            height='240'
+            width='100%'
+            preload='auto'
+            controls='controls'
+            poster='https://pbs.twimg.com/profile_images/2149314222/square.png'
+            mediaelement>
+            <source type='video/mp4' ng-src='{{ mp4Video }}' />
+        </video>
     </div>
 
     <div class='col-sm-6'>

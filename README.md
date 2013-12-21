@@ -4,7 +4,7 @@ A collection of useful directives, filters, and services for Angular JS.
 
 [Updates: @michaeljcalkins](https://twitter.com/michaeljcalkins)
 
-[Docs and Examples (In progress)](http://clouddueling.github.io/angular-common/)
+[Docs and Examples](http://clouddueling.github.io/angular-common/)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
@@ -21,7 +21,7 @@ bower install angular-common
 (function() {
 
     'use strict';
-    
+
     angular.module('app', [
         'common.api',
         'common.confirm',
@@ -54,7 +54,7 @@ Or instead of writing all of that out you can create a use a single reference by
     angular.module('app', [
         'common.master'
     ]);
-    
+
 })();
 ```
 
