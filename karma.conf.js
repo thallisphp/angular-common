@@ -18,7 +18,7 @@ module.exports = function(config) {
         'bower_components/angular/angular.js',
         'bower_components/angular-mocks/angular-mocks.js',
         'bower_components/lodash/dist/lodash.min.js',
-        'modules/*/*.js',
+        'build/angular-common.min.js',
         'modules/*/test/*Spec.js'
     ],
 
