@@ -73,7 +73,7 @@
         grunt.loadNpmTasks('grunt-karma');
 
         grunt.registerTask('default', [
-            'test:continuous',
+            'test',
             'concat:javascript',
             'uglify',
         ]);
