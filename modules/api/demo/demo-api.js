@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.api', [])
+    angular.module('demo.api', [
+        'common.api'
+    ])
 
     .controller('DemoApiCtrl', ['$scope', 'Api', function($scope, Api) {
         Api.setBase('http://api.randomuser.me/');

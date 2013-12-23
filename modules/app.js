@@ -3,23 +3,6 @@
     "use strict";
 
     angular.module('angular-common', [
-        'common.api',
-        'common.confirm',
-        'common.dateRange',
-        'common.drag',
-        'common.dragdrop',
-        'common.fullscreen',
-        'common.mediaelement',
-        'common.modal',
-        'common.ngBindHtmlUnsafe',
-        'common.print',
-        'common.redactor',
-        'common.skype',
-        'common.strings',
-        'common.time',
-        'common.upload',
-        'common.youtube',
-
         'demo.api',
         'demo.confirm',
         'demo.daterange',
@@ -37,10 +20,6 @@
         'demo.upload',
         'demo.youtube'
     ])
-
-    .config(function($sceProvider) {
-        $sceProvider.enabled(false);
-    })
 
     .config(['$sceProvider', '$compileProvider', function($sceProvider, $compileProvider) {
         $sceProvider.enabled(false);

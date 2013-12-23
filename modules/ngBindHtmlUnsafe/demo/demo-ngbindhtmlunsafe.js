@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.ngBindHtmlUnsafe', [])
+    angular.module('demo.ngBindHtmlUnsafe', [
+        'common.ngBindHtmlUnsafe'
+    ])
 
     .controller('DemoNgBindHtmlUnsafeCtrl', ['$scope', function($scope) {
         $scope.html = "<pre><strong>Come at me bro!</strong></pre>";

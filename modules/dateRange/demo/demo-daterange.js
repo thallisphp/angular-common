@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.daterange', [])
+    angular.module('demo.daterange', [
+        'common.dateRange'
+    ])
 
     .controller('DemoDateRangeCtrl', ['$scope', function($scope) {
         $scope.startDate = moment().subtract('days', 50).format("YYYY-MM-DD");

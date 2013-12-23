@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.strings', [])
+    angular.module('demo.strings', [
+        'common.strings'
+    ])
 
     .controller('DemoStringsCtrl', ['$scope', function($scope) {
         $scope.slugifyExample = "my blog example here";

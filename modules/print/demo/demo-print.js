@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.print', [])
+    angular.module('demo.print', [
+        'demo.print'
+    ])
 
     .controller('DemoPrintCtrl', ['$scope', function($scope) {
         $scope.codeExample = "<button\n" +

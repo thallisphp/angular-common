@@ -6,7 +6,7 @@
         grunt.initConfig({
             concat: {
                 options: {
-                    separator: ";\n",
+                    separator: "\n\n",
                 },
                 javascript: {
                     src: [

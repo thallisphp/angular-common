@@ -127,7 +127,8 @@
         return api;
     }]);
     
-})();;
+})();
+
 (function() {
     
     "use strict";
@@ -198,7 +199,8 @@
         };
     }]);
     
-})();;
+})();
+
 (function() {
 
     "use strict";
@@ -270,7 +272,8 @@
         };
     }]);
 
-})();;
+})();
+
 (function() {
     
     "use strict";
@@ -297,7 +300,8 @@
         };
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
@@ -376,7 +380,8 @@
         };
     }])
 
-;})();;
+;})();
+
 (function() {
 
     'use strict';
@@ -440,7 +445,8 @@
     }]);
 
 })();
-;
+
+
 (function() {
     
     "use strict";
@@ -497,7 +503,8 @@
     }]);
     
 })();
-;
+
+
 (function() {
     
     "use strict";
@@ -565,7 +572,8 @@
         return modalService;
     }]);
     
-})();;
+})();
+
 (function() {
     
     "use strict";
@@ -581,7 +589,8 @@
         };
     }]);
 
-}());;
+}());
+
 (function() {
 
     "use strict";
@@ -614,7 +623,8 @@
         };
     }]);
 
-})();;
+})();
+
 (function() {
     
     "use strict";
@@ -662,7 +672,8 @@
     }]);
     
 })();
-;
+
+
 (function() {
 
     'use strict';
@@ -678,18 +689,15 @@
             value = String(value).replace(/\D/g, '');
 
             if (value[0] === '1') {
-                value = "+" + value;
+                value = value.substr(1);
             }
 
-            if (value[0] !== '+' && value[1] !== '1') {
-                value = "+1" + value;
-            }
-
-            return 'skype:' + value + '?call';
+            return 'skype:+1' + value + '?call';
         };
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
@@ -834,7 +842,8 @@
         };
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
@@ -917,7 +926,8 @@
         };
     }]);
 
-})();;
+})();
+
 (function() {
     
     "use strict";
@@ -1013,7 +1023,8 @@
         };
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
@@ -1064,29 +1075,13 @@
     }]);
 
 })();
-;
+
+
 (function() {
 
     "use strict";
 
     angular.module('angular-common', [
-        'common.api',
-        'common.confirm',
-        'common.dateRange',
-        'common.drag',
-        'common.dragdrop',
-        'common.fullscreen',
-        'common.mediaelement',
-        'common.modal',
-        'common.ngBindHtmlUnsafe',
-        'common.print',
-        'common.redactor',
-        'common.skype',
-        'common.strings',
-        'common.time',
-        'common.upload',
-        'common.youtube',
-
         'demo.api',
         'demo.confirm',
         'demo.daterange',
@@ -1104,10 +1099,6 @@
         'demo.upload',
         'demo.youtube'
     ])
-
-    .config(function($sceProvider) {
-        $sceProvider.enabled(false);
-    })
 
     .config(['$sceProvider', '$compileProvider', function($sceProvider, $compileProvider) {
         $sceProvider.enabled(false);
@@ -1157,12 +1148,15 @@
     }]);
 
 })();
-;
+
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.api', [])
+    angular.module('demo.api', [
+        'common.api'
+    ])
 
     .controller('DemoApiCtrl', ['$scope', 'Api', function($scope, Api) {
         Api.setBase('http://api.randomuser.me/');
@@ -1187,12 +1181,15 @@
         "};";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.confirm', [])
+    angular.module('demo.confirm', [
+        'common.confirm'
+    ])
 
     .controller('DemoConfirmCtrl', ['$scope', function($scope) {
         $scope.deleteObject = function() {
@@ -1208,12 +1205,15 @@
         "</button>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.daterange', [])
+    angular.module('demo.daterange', [
+        'common.dateRange'
+    ])
 
     .controller('DemoDateRangeCtrl', ['$scope', function($scope) {
         $scope.startDate = moment().subtract('days', 50).format("YYYY-MM-DD");
@@ -1234,7 +1234,8 @@
         "   ng-update='updateDates(start, end)'></button>";
     }]);
 
-})();;
+})();
+
 (function() {
     
     "use strict";
@@ -1252,7 +1253,8 @@
         $scope.codeExample = "<div drag='object'></div>";
     }]);
     
-})();;
+})();
+
 (function() {
     
     "use strict";
@@ -1329,12 +1331,15 @@
         };
     }])
     
-;})();;
+;})();
+
 (function() {
 
     'use strict';
 
-    angular.module('demo.fullscreen', ['common.fullscreen'])
+    angular.module('demo.fullscreen', [
+        'common.fullscreen'
+    ])
 
     .controller('DemoFullscreenCtrl', ['$scope', 'Fullscreen', function($scope, Fullscreen) {
 
@@ -1355,12 +1360,15 @@
 
 })();
 
-;
+
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.mediaelement', [])
+    angular.module('demo.mediaelement', [
+        'common.mediaelement'
+    ])
 
     .controller('DemoMediaelementCtrl', ['$scope', function($scope) {
         $scope.mp4Video = 'http://playground.html5rocks.com/samples/html5_misc/chrome_japan.mp4';
@@ -1375,12 +1383,15 @@
         "</video>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.modal', [])
+    angular.module('demo.modal', [
+        'common.modal'
+    ])
 
     .controller('DemoModalCtrl', ['$scope', function($scope) {
         $scope.codeExample = "<button\n" +
@@ -1390,12 +1401,15 @@
         "</button>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.ngBindHtmlUnsafe', [])
+    angular.module('demo.ngBindHtmlUnsafe', [
+        'common.ngBindHtmlUnsafe'
+    ])
 
     .controller('DemoNgBindHtmlUnsafeCtrl', ['$scope', function($scope) {
         $scope.html = "<pre><strong>Come at me bro!</strong></pre>";
@@ -1403,12 +1417,15 @@
         $scope.codeExample = "<div ng-bind-html-unsafe='html'></div>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.print', [])
+    angular.module('demo.print', [
+        'demo.print'
+    ])
 
     .controller('DemoPrintCtrl', ['$scope', function($scope) {
         $scope.codeExample = "<button\n" +
@@ -1420,12 +1437,15 @@
         "<div id='print-demo'>Hey you there!</div>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.redactor', [])
+    angular.module('demo.redactor', [
+        'common.redactor'
+    ])
 
     .controller('DemoRedactorCtrl', ['$scope', function($scope) {
         $scope.myText = "Hello you!";
@@ -1434,12 +1454,15 @@
         "   ng-model='myText'></textarea>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.skype', [])
+    angular.module('demo.skype', [
+        'common.skype'
+    ])
 
     .controller('DemoSkypeCtrl', ['$scope', function($scope) {
         $scope.phoneNumber = "(425) 897 - 7897";
@@ -1448,12 +1471,15 @@
         "</a>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.strings', [])
+    angular.module('demo.strings', [
+        'common.strings'
+    ])
 
     .controller('DemoStringsCtrl', ['$scope', function($scope) {
         $scope.slugifyExample = "my blog example here";
@@ -1465,12 +1491,15 @@
         "<input type='text' ng-model='slugifyExample' slugify>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.time', [])
+    angular.module('demo.time', [
+        'common.time'
+    ])
 
     .controller('DemoTimeCtrl', ['$scope', function($scope) {
         $scope.timeExample = moment().format("YYYY-MM-DD H:mm:ss");
@@ -1479,12 +1508,15 @@
         "{{ timeExample | smallFromNow }}";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.upload', [])
+    angular.module('demo.upload', [
+        'common.upload'
+    ])
 
     .controller('DemoUploadCtrl', ['$scope', function($scope) {
         $scope.fileUploaded = function(data) {
@@ -1500,12 +1532,15 @@
         "</button>";
     }]);
 
-})();;
+})();
+
 (function() {
 
     "use strict";
 
-    angular.module('demo.youtube', [])
+    angular.module('demo.youtube', [
+        'common.youtube'
+    ])
 
     .controller('DemoYoutubeCtrl', ['$scope', function($scope) {
         $scope.youtubeUrl = 'http://www.youtube.com/watch?v=WrO9PTpuSSs';

@@ -2,7 +2,9 @@
 
     'use strict';
 
-    angular.module('demo.fullscreen', ['common.fullscreen'])
+    angular.module('demo.fullscreen', [
+        'common.fullscreen'
+    ])
 
     .controller('DemoFullscreenCtrl', ['$scope', 'Fullscreen', function($scope, Fullscreen) {
 

@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.redactor', [])
+    angular.module('demo.redactor', [
+        'common.redactor'
+    ])
 
     .controller('DemoRedactorCtrl', ['$scope', function($scope) {
         $scope.myText = "Hello you!";

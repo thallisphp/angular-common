@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.youtube', [])
+    angular.module('demo.youtube', [
+        'common.youtube'
+    ])
 
     .controller('DemoYoutubeCtrl', ['$scope', function($scope) {
         $scope.youtubeUrl = 'http://www.youtube.com/watch?v=WrO9PTpuSSs';

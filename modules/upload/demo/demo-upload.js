@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.upload', [])
+    angular.module('demo.upload', [
+        'common.upload'
+    ])
 
     .controller('DemoUploadCtrl', ['$scope', function($scope) {
         $scope.fileUploaded = function(data) {

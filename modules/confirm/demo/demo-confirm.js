@@ -2,7 +2,9 @@
 
     "use strict";
 
-    angular.module('demo.confirm', [])
+    angular.module('demo.confirm', [
+        'common.confirm'
+    ])
 
     .controller('DemoConfirmCtrl', ['$scope', function($scope) {
         $scope.deleteObject = function() {
