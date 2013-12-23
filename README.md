@@ -38,6 +38,7 @@ There is a `Gruntfile.js` you can use to build your own version.  By default the
         'common.dateRange',
         'common.drag',
         'common.dragdrop',
+        'common.fullscreen',
         'common.mediaelement',
         'common.modal',
         'common.ngBindHtmlUnsafe',
