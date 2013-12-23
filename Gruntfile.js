@@ -11,6 +11,14 @@
                 },
                 javascript: {
                     src: [
+                        './bower_components/moment/min/moment.min.js',
+                        './bower_components/lodash.min.js',
+                        './bower_components/mediaelement/build/mediaelement-and-player.min.js',
+                        './bower_components/jquery-form/jquery.form.js',
+                        './bower_components/bootstrap/dist/js/bootstrap.min.js',
+                        './bower_components/bootstrap-daterangepicker/daterangepicker.js',
+                        './bower_components/angular/angular.min.js',
+
                         './modules/api/api.js',
                         './modules/confirm/confirm.js',
                         './modules/dateRange/dateRange.js',
