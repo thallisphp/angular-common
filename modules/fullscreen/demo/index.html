@@ -1,0 +1,23 @@
+<h3>Fullscreen</h3>
+<div class='row' ng-controller='DemoFullscreenCtrl'>
+    <div class='col-sm-6'>
+        <button
+            class='btn btn-default'
+            ng-click="fullscreen()">
+            Go fullscreen
+        </button>
+        <p>
+            <br>
+            <strong>Click the image</strong>
+            <img src="//lorempixel.com/400/200/sports/" alt="fullscreen-example" id="img01" fullscreen>
+        </p>
+    </div>
+
+    <div class='col-sm-6'>
+        <p>
+            Toggle fullscreen easily on all elements with fullscreen attribute (or press image)<br>
+        </p>
+
+        <pre>{{ codeExample }}</pre>
+    </div>
+</div>

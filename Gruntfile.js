@@ -16,6 +16,7 @@
                         './modules/dateRange/dateRange.js',
                         './modules/drag/drag.js',
                         './modules/dragdrop/dragdrop.js',
+                        './modules/fullscreen/fullscreen.js',
                         './modules/mediaelement/mediaelement.js',
                         './modules/modal/modal.js',
                         './modules/ngBindHtmlUnsafe/ngBindHtmlUnsafe.js',
