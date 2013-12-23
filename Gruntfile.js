@@ -57,9 +57,12 @@
                 }
             },
             karma: {
-                unit: {
-                    configFile: 'karma.conf.js',
-                    singleRun: true
+                options: {
+                    configFile: 'karma.conf.js'
+                },
+                continuous: {
+                    singleRun: true,
+                    browsers: ['PhantomJS']
                 }
             }
         });
@@ -70,7 +73,7 @@
         grunt.loadNpmTasks('grunt-karma');
 
         grunt.registerTask('default', [
-            'test',
+            'test:continuous',
             'concat:javascript',
             'uglify',
         ]);
