@@ -68,7 +68,27 @@ Instead of writing all of that out you can create a single reference point by ed
 })();
 ```
 
-## Running The Demo
+## Building
+
+```
+grunt
+```
+
+## Running Tests
+
+Run once:
+```
+grunt test
+```
+
+Watch for changes:
+```
+karam start karma.conf.js
+```
+
+
+
+## Demo
 
 ***Run these commands from the root of the repo.***
 

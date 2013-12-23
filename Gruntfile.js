@@ -3,6 +3,7 @@
     'use strict';
 
     module.exports = function(grunt) {
+
         grunt.initConfig({
             concat: {
                 options: {
@@ -55,17 +56,26 @@
                     }
                 }
             },
+            karma: {
+                unit: {
+                    configFile: 'karma.conf.js',
+                    singleRun: true
+                }
+            }
         });
 
         grunt.loadNpmTasks('grunt-contrib-concat');
-        grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.loadNpmTasks('grunt-contrib-less');
         grunt.loadNpmTasks('grunt-contrib-uglify');
+        grunt.loadNpmTasks('grunt-karma');
 
         grunt.registerTask('default', [
+            'test',
             'concat:javascript',
             'uglify',
         ]);
+
+        grunt.registerTask('test', ['karma']);
     };
 
 })();
