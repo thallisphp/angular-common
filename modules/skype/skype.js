@@ -13,14 +13,10 @@
             value = String(value).replace(/\D/g, '');
 
             if (value[0] === '1') {
-                value = "+" + value;
+                value = value.substr(1);
             }
 
-            if (value[0] !== '+' && value[1] !== '1') {
-                value = "+1" + value;
-            }
-
-            return 'skype:' + value + '?call';
+            return 'skype:+1' + value + '?call';
         };
     }]);
 

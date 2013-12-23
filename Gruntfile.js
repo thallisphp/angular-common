@@ -10,7 +10,6 @@
                 },
                 javascript: {
                     src: [
-                        './modules/common/common.js',
                         './modules/api/api.js',
                         './modules/confirm/confirm.js',
                         './modules/dateRange/dateRange.js',
@@ -26,7 +25,25 @@
                         './modules/strings/strings.js',
                         './modules/time/time.js',
                         './modules/upload/upload.js',
-                        './modules/youtube/youtube.js'
+                        './modules/youtube/youtube.js',
+
+                        './modules/app.js',
+                        './modules/api/demo/demo-api.js',
+                        './modules/confirm/demo/demo-confirm.js',
+                        "./modules/dateRange/demo/demo-daterange.js",
+                        "./modules/drag/demo/demo-drag.js",
+                        "./modules/dragdrop/demo/demo-dragdrop.js",
+                        "./modules/fullscreen/demo/demo-fullscreen.js",
+                        "./modules/mediaelement/demo/demo-mediaelement.js",
+                        "./modules/modal/demo/demo-modal.js",
+                        "./modules/ngBindHtmlUnsafe/demo/demo-ngbindhtmlunsafe.js",
+                        "./modules/print/demo/demo-print.js",
+                        "./modules/redactor/demo/demo-redactor.js",
+                        "./modules/skype/demo/demo-skype.js",
+                        "./modules/strings/demo/demo-strings.js",
+                        "./modules/time/demo/demo-time.js",
+                        "./modules/upload/demo/demo-upload.js",
+                        "./modules/youtube/demo/demo-youtube.js"
                     ],
                     dest: './build/angular-common.js'
                 }

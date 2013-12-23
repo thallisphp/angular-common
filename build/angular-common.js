@@ -1,36 +1,3 @@
-/**
-
-    This file simply includes all common modules if you need them all or you can modify it to include less or more.
-
-    Then you just need to type `common` into your modules instead of listing them all.
-
-*/
-
-(function() {
-
-    "use strict";
-
-    angular.module('common.master', [
-        'common.api',
-        'common.confirm',
-        'common.dateRange',
-        'common.drag',
-        'common.dragdrop',
-        'common.fullscreen',
-        'common.mediaelement',
-        'common.modal',
-        'common.ngBindHtmlUnsafe',
-        'common.print',
-        'common.redactor',
-        'common.skype',
-        'common.strings',
-        'common.time',
-        'common.upload',
-        'common.youtube'
-    ])
-
-;})();
-;
 (function() {
     
     "use strict";
@@ -1094,6 +1061,456 @@
 
             return "//i2.ytimg.com/vi/" + videoid[1] + "/mqdefault.jpg";
         };
+    }]);
+
+})();
+;
+(function() {
+
+    "use strict";
+
+    angular.module('angular-common', [
+        'common.api',
+        'common.confirm',
+        'common.dateRange',
+        'common.drag',
+        'common.dragdrop',
+        'common.fullscreen',
+        'common.mediaelement',
+        'common.modal',
+        'common.ngBindHtmlUnsafe',
+        'common.print',
+        'common.redactor',
+        'common.skype',
+        'common.strings',
+        'common.time',
+        'common.upload',
+        'common.youtube',
+
+        'demo.api',
+        'demo.confirm',
+        'demo.daterange',
+        'demo.drag',
+        'demo.dragdrop',
+        'demo.fullscreen',
+        'demo.mediaelement',
+        'demo.modal',
+        'demo.ngBindHtmlUnsafe',
+        'demo.print',
+        'demo.redactor',
+        'demo.skype',
+        'demo.strings',
+        'demo.time',
+        'demo.upload',
+        'demo.youtube'
+    ])
+
+    .config(function($sceProvider) {
+        $sceProvider.enabled(false);
+    })
+
+    .config(['$sceProvider', '$compileProvider', function($sceProvider, $compileProvider) {
+        $sceProvider.enabled(false);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|skype):/) ;
+    }])
+
+    .controller('MainCtrl', ['$scope', function($scope) {
+        $scope.modules = [
+            'api',
+            'confirm',
+            'dateRange',
+            'drag',
+            'dragdrop',
+            'fullscreen',
+            'mediaelement',
+            'modal',
+            'ngBindHtmlUnsafe',
+            'print',
+            'redactor',
+            'skype',
+            'strings',
+            'time',
+            'upload',
+            'youtube'
+        ];
+    }])
+
+    .directive('scrollOnClick', [function() {
+        return {
+            restrict: 'A',
+            link: function(scope, $elm, attrs) {
+                var idToScroll = attrs.href;
+                $elm.on('click', function() {
+                    var $target;
+                    if (idToScroll) {
+                        $target = $(idToScroll);
+                    } else {
+                        $target = $elm;
+                    }
+
+                    $("body").animate({
+                        scrollTop: $target.offset().top
+                    }, "slow");
+                });
+            }
+        };
+    }]);
+
+})();
+;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.api', [])
+
+    .controller('DemoApiCtrl', ['$scope', 'Api', function($scope, Api) {
+        Api.setBase('http://api.randomuser.me/');
+        $scope.results = 1;
+
+        $scope.loadRandomUser = function() {
+            Api.get('', {
+                results: $scope.results
+            }).success(function(data) {
+                $scope.randomUsers = data;
+            });
+        };
+
+        $scope.codeExample = "Api.setBase('/api/v1/');\n\n" +
+
+        "$scope.loadUser = function(userId, filters) {\n" +
+        "   Api.get('user/' + userId, {\n" +
+        "       filters: filters\n" +
+        "   }).success(function(data) {\n" +
+        "       $scope.data = data;\n" +
+        "   });\n" +
+        "};";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.confirm', [])
+
+    .controller('DemoConfirmCtrl', ['$scope', function($scope) {
+        $scope.deleteObject = function() {
+            $scope.objectDeleted = "Twas deleted or whatever the function is you put here!";
+        };
+
+        $scope.codeExample = "<button\n" +
+        "   class='btn btn-default'\n" +
+        "   confirm='deleteObject(objectId)'\n" +
+        "   confirm-title='Delete this object?'\n" +
+        "   confirm-placement='left'>\n" +
+        "   Click Me\n" +
+        "</button>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.daterange', [])
+
+    .controller('DemoDateRangeCtrl', ['$scope', function($scope) {
+        $scope.startDate = moment().subtract('days', 50).format("YYYY-MM-DD");
+        $scope.endDate = moment().format("YYYY-MM-DD");
+
+        $scope.dateRangeOptions = {
+            startDate: $scope.startDate,
+            endDate: $scope.endDate
+        };
+
+        $scope.updateDates = function(start, end) {
+            $scope.startDate = start;
+            $scope.endDate = end;
+        };
+
+        $scope.codeExample = "<button\n" +
+        "   date-range='dateRangeOptions'\n" +
+        "   ng-update='updateDates(start, end)'></button>";
+    }]);
+
+})();;
+(function() {
+    
+    "use strict";
+    
+    angular.module('demo.drag', [
+        'common.drag'
+    ])
+
+    .controller('DemoDragCtrl', ['$scope', function($scope) {
+        $scope.object = {
+            top: 0,
+            left: 0
+        };
+        
+        $scope.codeExample = "<div drag='object'></div>";
+    }]);
+    
+})();;
+(function() {
+    
+    "use strict";
+    
+    angular.module('demo.dragdrop', [
+        'common.dragdrop'
+    ])
+
+    .controller('DemoDragDropCtrl', ['$scope', 'DragDropHandler', function($scope, DragDropHandler) {
+        $scope.items = [
+            {
+                id: 3,
+                name:'Item 1'
+            },
+            {
+                id: 4,
+                name:'Item 2'
+            },
+            {
+                id: 5,
+                name:'Item 3'
+            },
+            {
+                id: 6,
+                name:'Item 4'
+            }
+        ];
+              
+        $scope.objects = [
+            {
+                id: 1,
+                name: 'New Item 1'
+            },
+            {
+                id: 2,
+                name: 'New Item 2'
+            }
+        ];
+
+        $scope.codeExample = "<ul>\n" +
+            "   <li\n" +
+            "       ng-repeat='object in objects'\n" +
+            "       draggable='object'\n" +
+            "       draggable-target='#sortable'>\n" +
+            "       {{ object.name }}\n" +
+            "   </li>\n" +
+            "</ul>\n\n" +
+
+            "<ul\n" +
+            "   droppable='items'\n" +
+            "   ng-update='updateObjects(id, from, to)'\n" +
+            "   ng-create='createObject(object, to)'\n" +
+            "   id='sortable'>\n" +
+            "   <li ng-repeat='item in items track by item.id'>\n"+
+            "       {{ item.name }}\n" +
+            "   </li>\n" +
+        "</ul>";
+        
+        $scope.updateObjects = function(from, to) {
+            var itemIds = _.pluck($scope.items, 'id');
+            console.log(itemIds);
+        };
+
+        $scope.createObject = function(object, to) {
+            var newItem = angular.copy(object);
+            newItem.id = Math.ceil(Math.random() * 1000);
+            DragDropHandler.addObject(newItem, $scope.items, to);
+        };
+        
+        $scope.deleteItem = function(itemId) {
+            $scope.items = _.reject($scope.items, function(item) {
+                return item.id == itemId; 
+            });
+        };
+    }])
+    
+;})();;
+(function() {
+
+    'use strict';
+
+    angular.module('demo.fullscreen', ['common.fullscreen'])
+
+    .controller('DemoFullscreenCtrl', ['$scope', 'Fullscreen', function($scope, Fullscreen) {
+
+        $scope.fullscreen = function() {
+            if (Fullscreen.isEnabled()) {
+                Fullscreen.cancel();
+            } else {
+                Fullscreen.all();
+            }
+        };
+
+        $scope.codeExample = "<button\n"+
+        "    class='btn btn-default'\n"+
+        "    ng-click='fullscreen()'>\n"+
+        "    Go fullscreen\n"+
+        "</button>";
+    }]);
+
+})();
+
+;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.mediaelement', [])
+
+    .controller('DemoMediaelementCtrl', ['$scope', function($scope) {
+        $scope.mp4Video = 'http://playground.html5rocks.com/samples/html5_misc/chrome_japan.mp4';
+        $scope.codeExample = "<video\n" +
+        "   height='240'\n" +
+        "   width='100%'\n" +
+        "   preload='auto'\n" +
+        "   controls='controls'\n" +
+        "   poster='/images/square.png'\n" +
+        "   mediaelement>\n" +
+        "   <source type='video/mp4' ng-src='{{ mp4Video }}' />\n" +
+        "</video>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.modal', [])
+
+    .controller('DemoModalCtrl', ['$scope', function($scope) {
+        $scope.codeExample = "<button\n" +
+        "   modal='modules/modal/demo/demo.modal.html'\n" +
+        "   class='btn btn-default'>\n" +
+        "   Open Modal\n" +
+        "</button>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.ngBindHtmlUnsafe', [])
+
+    .controller('DemoNgBindHtmlUnsafeCtrl', ['$scope', function($scope) {
+        $scope.html = "<pre><strong>Come at me bro!</strong></pre>";
+
+        $scope.codeExample = "<div ng-bind-html-unsafe='html'></div>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.print', [])
+
+    .controller('DemoPrintCtrl', ['$scope', function($scope) {
+        $scope.codeExample = "<button\n" +
+        "   class='btn btn-default'\n" +
+        "   print='#print-demo'\n" +
+        "   print-title='Print Demo'>\n" +
+        "   Print\n" +
+        "</button>\n\n" +
+        "<div id='print-demo'>Hey you there!</div>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.redactor', [])
+
+    .controller('DemoRedactorCtrl', ['$scope', function($scope) {
+        $scope.myText = "Hello you!";
+        $scope.codeExample = "<textarea\n" +
+        "   redactor\n" +
+        "   ng-model='myText'></textarea>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.skype', [])
+
+    .controller('DemoSkypeCtrl', ['$scope', function($scope) {
+        $scope.phoneNumber = "(425) 897 - 7897";
+        $scope.codeExample = "<a href='{{ phoneNumber | skype }}'>\n" +
+        "   {{ phoneNumber | skype }}\n" +
+        "</a>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.strings', [])
+
+    .controller('DemoStringsCtrl', ['$scope', function($scope) {
+        $scope.slugifyExample = "my blog example here";
+        $scope.codeExample = "{{ 'title case' | titleCase }}\n" +
+        "{{ 'Lower Case' | lowerCase }}\n" +
+        "{{ 'nl\\nbr' | nl2br }}\n" +
+        "{{ 'I soooo loooonnnggggg' | truncate:15 }}\n" +
+        "{{ 'http://www.google.com' | encodeURIComponent }}\n" +
+        "<input type='text' ng-model='slugifyExample' slugify>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.time', [])
+
+    .controller('DemoTimeCtrl', ['$scope', function($scope) {
+        $scope.timeExample = moment().format("YYYY-MM-DD H:mm:ss");
+        $scope.codeExample = "{{ timeExample | moment:'MMM D, YYYY - h:mma' }}\n" +
+        "{{ timeExample | fromNow }}\n" +
+        "{{ timeExample | smallFromNow }}";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.upload', [])
+
+    .controller('DemoUploadCtrl', ['$scope', function($scope) {
+        $scope.fileUploaded = function(data) {
+            console.log(data);
+        };
+
+        $scope.codeExample = "<button\n" +
+        "   class='btn btn-default'\n" +
+        "   ng-model='newFile.filename'\n" +
+        "   ng-change='optionFileUploaded(data)'\n" +
+        "   upload='\"/your/upload/location\"'>\n" +
+        "   Choose Image\n" +
+        "</button>";
+    }]);
+
+})();;
+(function() {
+
+    "use strict";
+
+    angular.module('demo.youtube', [])
+
+    .controller('DemoYoutubeCtrl', ['$scope', function($scope) {
+        $scope.youtubeUrl = 'http://www.youtube.com/watch?v=WrO9PTpuSSs';
+        $scope.codeExample1 = "<img ng-src='{{ youtubeUrl | youtubeImage }}'>";
+        $scope.codeExample2 = "<iframe frameborder='0' ng-src='{{ youtubeUrl | youtubeIframe }}'></iframe>";
     }]);
 
 })();
