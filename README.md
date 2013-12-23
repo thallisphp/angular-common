@@ -6,7 +6,7 @@ A collection of useful directives, filters, and services for Angular JS.
 
 [Docs and Examples](http://clouddueling.github.io/angular-common/)
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge") [![Build Status](https://travis-ci.org/clouddueling/angular-common.png?branch=master)](https://travis-ci.org/clouddueling/angular-common)
 
 
 ## Install
