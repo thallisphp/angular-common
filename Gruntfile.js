@@ -71,6 +71,9 @@
                 continuous: {
                     singleRun: true,
                     browsers: ['PhantomJS']
+                },
+                chrome: {
+                    browsers: ['Chrome']
                 }
             }
         });
@@ -78,6 +81,7 @@
         grunt.loadNpmTasks('grunt-contrib-concat');
         grunt.loadNpmTasks('grunt-contrib-less');
         grunt.loadNpmTasks('grunt-contrib-uglify');
+        grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.loadNpmTasks('grunt-karma');
 
         grunt.registerTask('default', [
@@ -86,7 +90,7 @@
             'uglify',
         ]);
 
-        grunt.registerTask('test', ['karma']);
+        grunt.registerTask('test', ['karma:chrome']);
     };
 
 })();

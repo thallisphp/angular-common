@@ -140,6 +140,17 @@
                 });
             }
         };
+    }])
+
+
+    //
+    // NOTE Strip Html Tags
+    // --------------------------------------------------
+
+    .filter('stripHtml', [function () {
+        return function(text) {
+            return String(text).replace(/<(?:.|\n)*?>/gm, '');
+        }
     }]);
 
 })();
