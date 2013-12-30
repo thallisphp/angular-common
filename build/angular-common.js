@@ -3525,7 +3525,6 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
         'demo.daterange',
         'demo.drag',
         'demo.dragdrop',
-        'demo.fullscreen',
         'demo.mediaelement',
         'demo.modal',
         'demo.ngBindHtmlUnsafe',
@@ -3550,7 +3549,6 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
             'dateRange',
             'drag',
             'dragdrop',
-            'fullscreen',
             'mediaelement',
             'modal',
             'ngBindHtmlUnsafe',
@@ -3891,13 +3889,18 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
     ])
 
     .controller('DemoStringsCtrl', ['$scope', function($scope) {
-        $scope.slugifyExample = "my blog example here";
+        $scope.examples = {
+            slugify: "my blog example here",
+            stripHtml: "<p>test</p>"
+        };
+
         $scope.codeExample = "{{ 'title case' | titleCase }}\n" +
         "{{ 'Lower Case' | lowerCase }}\n" +
         "{{ 'nl\\nbr' | nl2br }}\n" +
         "{{ 'I soooo loooonnnggggg' | truncate:15 }}\n" +
         "{{ 'http://www.google.com' | encodeURIComponent }}\n" +
-        "<input type='text' ng-model='slugifyExample' slugify>";
+        "{{ htmlString | stripHtml }}\n" +
+        "<input type='text' ng-model='examples.slugify' slugify>";
     }]);
 
 })();

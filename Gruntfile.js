@@ -84,10 +84,15 @@
         grunt.loadNpmTasks('grunt-contrib-watch');
         grunt.loadNpmTasks('grunt-karma');
 
+        grunt.registerTask('build', [
+            'concat:javascript',
+            'uglify'
+        ]);
+
         grunt.registerTask('default', [
             'karma:phantom',
             'concat:javascript',
-            'uglify',
+            'uglify'
         ]);
 
         grunt.registerTask('test', ['karma:chrome']);
