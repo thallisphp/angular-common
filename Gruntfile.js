@@ -68,7 +68,7 @@
                 options: {
                     configFile: 'karma.conf.js'
                 },
-                continuous: {
+                phantom: {
                     singleRun: true,
                     browsers: ['PhantomJS']
                 },
@@ -85,7 +85,7 @@
         grunt.loadNpmTasks('grunt-karma');
 
         grunt.registerTask('default', [
-            'test',
+            'karma:phantom',
             'concat:javascript',
             'uglify',
         ]);
