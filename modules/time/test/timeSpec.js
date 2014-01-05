@@ -2,7 +2,7 @@ describe('angular.common: time |', function() {
     beforeEach(module('common.time'));
 
     describe('moment |', function() {
-        it("should display the current time",  inject(function(momentFilter) {
+        it("should a base time with a format",  inject(function(momentFilter) {
             var time = '2013-12-31 21:30:00';
 
             expect(momentFilter(time, "YYYY")).toBe("2013");
@@ -13,11 +13,28 @@ describe('angular.common: time |', function() {
     });
 
     describe('fromNow |', function() {
-        it("should display the current time",  inject(function(fromNowFilter) {
-            var time = '2013-12-31 21:30:00';
-            var fromNow =
+        it("should display the difference between now and a base date",  inject(function(fromNowFilter) {
+            var startDateTime = '2013-12-31 21:30:00';
+            var endDateTime = '2014-01-04 21:30:00';
 
-            expect(fromNowFilter(time, "MMM DD, YYYY - h:mma")).toBe("");
+            var from = moment(startDateTime).from(endDateTime);
+            expect(from).toBe("4 days ago");
+        }));
+    });
+
+    describe('smallFromNow |', function() {
+        it("should display a shortened version of fromNow",  inject(function(smallFromNowFilter) {
+            var startDateTime = '2013-03-05 21:30:00';
+            var endDateTime = '2014-01-04 10:30:00';
+            expect(smallFromNowFilter(startDateTime, endDateTime)).toBe('10mon');
+
+            startDateTime = '2013-12-25 21:30:00';
+            endDateTime = '2013-12-26 21:30:00';
+            expect(smallFromNowFilter(startDateTime, endDateTime)).toBe('a day');
+
+            startDateTime = '2013-12-25 21:30:00';
+            endDateTime = '2013-12-25 22:30:00';
+            expect(smallFromNowFilter(startDateTime, endDateTime)).toBe('1h');
         }));
     });
 });

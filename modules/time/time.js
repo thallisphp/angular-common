@@ -17,13 +17,13 @@
     }])
 
     .filter('smallFromNow', [function() {
-        return function(input, p_allowFuture) {
+        return function(input, nowTime, p_allowFuture) {
             var substitute = function (stringOrFunction, number, strings) {
                     var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, dateDifference) : stringOrFunction;
                     var value = (strings.numbers && strings.numbers[number]) || number;
                     return string.replace(/%d/i, value);
                 },
-                nowTime = (new Date()).getTime(),
+                nowTime = (new Date(nowTime)).getTime() || (new Date()).getTime(),
                 date = (new Date(input)).getTime(),
                 //refreshMillis= 6e4, //A minute
                 allowFuture = p_allowFuture || false,
