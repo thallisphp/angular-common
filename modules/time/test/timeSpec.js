@@ -24,16 +24,16 @@ describe('angular.common: time |', function() {
 
     describe('smallFromNow |', function() {
         it("should display a shortened version of fromNow",  inject(function(smallFromNowFilter) {
-            var startDateTime = '2013-03-05 21:30:00';
-            var endDateTime = '2014-01-04 10:30:00';
+            var startDateTime = moment('2013-03-05 21:30:00').valueOf();
+            var endDateTime = moment('2014-01-04 10:30:00').valueOf();
             expect(smallFromNowFilter(startDateTime, endDateTime)).toBe('10mon');
 
-            startDateTime = '2013-12-25 21:30:00';
-            endDateTime = '2013-12-26 21:30:00';
+            startDateTime = moment('2013-12-25 21:30:00').valueOf();
+            endDateTime = moment('2013-12-26 21:30:00').valueOf();
             expect(smallFromNowFilter(startDateTime, endDateTime)).toBe('a day');
 
-            startDateTime = '2013-12-25 21:30:00';
-            endDateTime = '2013-12-25 22:30:00';
+            startDateTime = moment('2013-12-25 21:30:00').valueOf();
+            endDateTime = moment('2013-12-25 22:30:00').valueOf();
             expect(smallFromNowFilter(startDateTime, endDateTime)).toBe('1h');
         }));
     });

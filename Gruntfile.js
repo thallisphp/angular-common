@@ -73,7 +73,7 @@
                     browsers: ['PhantomJS']
                 },
                 chrome: {
-                    browsers: ['Chrome']
+                    browsers: ['PhantomJS']
                 }
             }
         });
