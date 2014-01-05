@@ -1,7 +1,7 @@
-describe('filters', function() {
+describe('angular.common: strings |', function() {
     beforeEach(module('common.strings'));
 
-    describe('stripHtml', function() {
+    describe('stripHtml | ', function() {
         it("should remove all html",  inject(function(stripHtmlFilter) {
             var strings = [
                 '<p>test</p>',
