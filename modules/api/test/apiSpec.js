@@ -27,18 +27,18 @@ describe('angular.common: api', function() {
     });
 
     it('should make a GET request to a url', function() {
-        expect(api.get('/api/v2/')).toBeDefined();
+        expect(api.get('users/1')).toBeDefined();
     });
 
     it('should make a PUT request to a url', function() {
-        expect(api.put('/api/v2/')).toBeDefined();
+        expect(api.put('users/1')).toBeDefined();
     });
 
     it('should make a POST request to a url', function() {
-        expect(api.post('/api/v2/')).toBeDefined();
+        expect(api.post('users')).toBeDefined();
     });
 
     it('should make a  request to a url', function() {
-        expect(api.delete('/api/v2/')).toBeDefined();
+        expect(api.delete('users/1')).toBeDefined();
     });
 });
