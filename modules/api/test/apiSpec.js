@@ -1,15 +1,13 @@
 describe('angular.common: api', function() {
-    var scope, httpMock, api, http;
+    var scope, httpBackend, api, http;
 
     beforeEach(module('common.api'));
 
     beforeEach(inject(function($rootScope, $controller, $httpBackend, Api, $http) {
         scope = $rootScope.$new();
-        httpMock = $httpBackend;
+        httpBackend = $httpBackend;
         api = Api;
         http = $http;
-
-        httpMock.when('GET', '/api/v2/test').respond('resr');
     }));
 
     it('should set the base to an api', function() {
@@ -29,18 +27,30 @@ describe('angular.common: api', function() {
     });
 
     it('should make a GET request to a url', function() {
-        expect(api.get('users/1')).toBeDefined();
+        api.setBase('/api/v1/');
+        httpBackend.expectGET('/api/v1/users/1?').respond();
+        api.get('users/1');
+        httpBackend.flush();
     });
 
     it('should make a PUT request to a url', function() {
-        expect(api.put('users/1')).toBeDefined();
+        api.setBase('/api/v1/');
+        httpBackend.expectPUT('/api/v1/users/1').respond();
+        api.put('users/1');
+        httpBackend.flush();
     });
 
     it('should make a POST request to a url', function() {
-        expect(api.post('users')).toBeDefined();
+        api.setBase('/api/v1/');
+        httpBackend.expectPOST('/api/v1/users/1').respond();
+        api.post('users/1');
+        httpBackend.flush();
     });
 
     it('should make a  request to a url', function() {
-        expect(api.delete('users/1')).toBeDefined();
+        api.setBase('/api/v1/');
+        httpBackend.expectDELETE('/api/v1/users/1?').respond();
+        api.delete('users/1');
+        httpBackend.flush();
     });
 });
