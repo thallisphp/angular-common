@@ -19,11 +19,13 @@ describe('angular.common: api', function() {
 
     it('should convert and object to a query string', function() {
         var data = {
-            userId: 1,
+            serieId: 100,
+            stringId: '123',
+            userId: 0,
             posts: ['test', 'test1']
         };
 
-        expect(api.encodeObject(data), "userId=1&posts[0]=test&posts[1]=test1");
+        expect(api.encodeObject(data)).toBe("serieId=100&stringId=123&userId=0&posts[0]=test&posts[1]=test1&");
     });
 
     it('should make a GET request to a url', function() {

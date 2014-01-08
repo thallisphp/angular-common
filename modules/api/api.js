@@ -19,7 +19,7 @@
             this.encodeObject = function(obj) {
                 var str = "";
                 for(var p in obj) {
-                    if (obj[p]) {
+                    if (obj[p] !== undefined) {
                         switch(typeof obj[p]) {
                             case 'boolean' :
                                 str += p + '=' + parseInt(obj[p], 10) + "&";
