@@ -2491,160 +2491,259 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
 
 (function() {
-    
+
     "use strict";
-    
+
     angular.module('common.api', [])
-    
-    .factory('Api', ['$http', function($http) {
-        /**
-         * @api {private} encodeObject(obj); encodeObject()
-         * @apiName encodeObject
-         * @apiGroup API
-         *
-         * @apiParam {Object} obj The object to be converted into a http query string.
-         *
-         * @apiSuccess {String} str http query string.
-         */
-        function encodeObject(obj) {
-            var str = "";
-            for(var p in obj) {
-                if (obj[p]) {
-                    switch(typeof obj[p]) {
-                    case 'boolean' :
-                        str += p + '=' + parseInt(obj[p], 10) + "&";
-                        break;
-    
-                    case 'number' :
-                    case 'string' :
-                        str += p + "=" + obj[p] + "&";
-                        break;
-    
-                    case 'object' :
-                        for (var i in obj[p]) {
-                            if (obj[p][i]) {
-                                str += p + "[" + encodeURIComponent(i) + "]=" + encodeURIComponent(obj[p][i]) + "&";
-                            }
+
+        .factory('Api', ['$http', function($http) {
+            this.base = '';
+
+            /**
+             * @api {private} encodeObject(obj); encodeObject()
+             * @apiName encodeObject
+             * @apiGroup API
+             *
+             * @apiParam {Object} obj The object to be converted into a http query string.
+             *
+             * @apiSuccess {String} str http query string.
+             */
+            this.encodeObject = function(obj) {
+                var str = "";
+                for(var p in obj) {
+                    if (obj[p] !== undefined) {
+                        switch(typeof obj[p]) {
+                            case 'boolean' :
+                                str += p + '=' + parseInt(obj[p], 10) + "&";
+                                break;
+
+                            case 'number' :
+                            case 'string' :
+                                str += p + "=" + obj[p] + "&";
+                                break;
+
+                            case 'object' :
+                                for (var i in obj[p]) {
+                                    if (obj[p][i]) {
+                                        str += p + "[" + encodeURIComponent(i) + "]=" + encodeURIComponent(obj[p][i]) + "&";
+                                    }
+                                }
+                                break;
                         }
-                        break;
                     }
                 }
+
+                return str;
             }
-    
-            return str;
-        }
-        
-        var base = '';
-        var api = {};
-        
-        
-        
-        /**
-         * @api {public} Api.setBase('/api/v2/'); setBase()
-         * @apiName setBase
-         * @apiGroup API
-         *
-         * @apiParam {String} newBase The new base url for all $http requests.
-         *
-         * @apiSuccess {Null} null
-         */
-        api.setBase = function(newBase) {
-            base = newBase;
-        };
-        
-        
-        
-        /**
-         * @api {public} Api.get(url,data); get()
-         * @apiName get
-         * @apiGroup API
-         *
-         * @apiParam {String} url Get destination.
-         * @apiParam {Object} data Data to be sent with request.
-         *
-         * @apiSuccess {Promise} promise Standard $http promise.
-         */
-        api.get = function(url, data){
-            return $http.get(base + url + "?" + encodeObject(data));
-        };
-        
-        
-        
-        /**
-         * @api {public} Api.get(url,data); get()
-         * @apiName get
-         * @apiGroup API
-         *
-         * @apiParam {String} url Get destination.
-         * @apiParam {Object} data Data to be sent with request.
-         *
-         * @apiSuccess {Promise} promise Standard $http promise.
-         */
-        api.post = function(url, data){
-            return $http.post(base + url, data);
-        };
-        
-        
-        
-        /**
-         * @api {public} Api.get(url,data); get()
-         * @apiName get
-         * @apiGroup API
-         *
-         * @apiParam {String} url Get destination.
-         * @apiParam {Object} data Data to be sent with request.
-         *
-         * @apiSuccess {Promise} promise Standard $http promise.
-         */
-        api.put = function(url, data){
-            return $http.put(base + url, data);
-        };
-        
-        
-        
-        /**
-         * @api {public} Api.get(url,data); get()
-         * @apiName get
-         * @apiGroup API
-         *
-         * @apiParam {String} url Get destination.
-         * @apiParam {Object} data Data to be sent with request.
-         *
-         * @apiSuccess {Promise} promise Standard $http promise.
-         */
-        api.delete = function(url, data){
-            return $http.delete(base + url + "?" + encodeObject(data));
-        };
-        
-        return api;
-    }]);
-    
+
+            /**
+             * @api {public} Api.setBase('/api/v2/'); setBase()
+             * @apiName setBase
+             * @apiGroup API
+             *
+             * @apiParam {String} newBase The new base url for all $http requests.
+             *
+             * @apiSuccess {Null} null
+             */
+            this.setBase = function(newBase) {
+                this.base = newBase;
+            };
+
+            this.getBase = function() {
+                return this.base;
+            };
+
+            /**
+             * @api {public} Api.get(url,data); get()
+             * @apiName get
+             * @apiGroup API
+             *
+             * @apiParam {String} url Get destination.
+             * @apiParam {Object} data Data to be sent with request.
+             *
+             * @apiSuccess {Promise} promise Standard $http promise.
+             */
+            this.get = function(url, data) {
+                return $http.get(this.base + url + "?" + this.encodeObject(data));
+            };
+
+            /**
+             * @api {public} Api.get(url,data); get()
+             * @apiName get
+             * @apiGroup API
+             *
+             * @apiParam {String} url Get destination.
+             * @apiParam {Object} data Data to be sent with request.
+             *
+             * @apiSuccess {Promise} promise Standard $http promise.
+             */
+            this.post = function(url, data){
+                return $http.post(this.base + url, data);
+            };
+
+            /**
+             * @api {public} Api.get(url,data); get()
+             * @apiName get
+             * @apiGroup API
+             *
+             * @apiParam {String} url Get destination.
+             * @apiParam {Object} data Data to be sent with request.
+             *
+             * @apiSuccess {Promise} promise Standard $http promise.
+             */
+            this.put = function(url, data){
+                return $http.put(this.base + url, data);
+            };
+
+            /**
+             * @api {public} Api.get(url,data); get()
+             * @apiName get
+             * @apiGroup API
+             *
+             * @apiParam {String} url Get destination.
+             * @apiParam {Object} data Data to be sent with request.
+             *
+             * @apiSuccess {Promise} promise Standard $http promise.
+             */
+            this.delete = function(url, data){
+                return $http.delete(this.base + url + "?" + this.encodeObject(data));
+            };
+
+            return this;
+        }]);
+
 })();
 
 (function() {
-    
+
     "use strict";
-    
+
+    angular.module('demo.api', [
+        'common.api'
+    ])
+
+    .controller('DemoApiCtrl', ['$scope', 'Api', function($scope, Api) {
+        Api.setBase('http://api.randomuser.me/');
+        $scope.results = 1;
+
+        $scope.loadRandomUser = function() {
+            Api.get('', {
+                results: $scope.results
+            }).success(function(data) {
+                $scope.randomUsers = data;
+            });
+        };
+
+        $scope.codeExample = "Api.setBase('/api/v1/');\n\n" +
+
+        "$scope.loadUser = function(userId, filters) {\n" +
+        "   Api.get('user/' + userId, {\n" +
+        "       filters: filters\n" +
+        "   }).success(function(data) {\n" +
+        "       $scope.data = data;\n" +
+        "   });\n" +
+        "};";
+    }]);
+
+})();
+
+(function() {
+
+    "use strict";
+
+    angular.module('angular-common', [
+        'demo.api',
+        'demo.confirm',
+        'demo.daterange',
+        'demo.drag',
+        'demo.dragdrop',
+        'demo.mediaelement',
+        'demo.modal',
+        'demo.ngBindHtmlUnsafe',
+        'demo.print',
+        'demo.progress',
+        'demo.redactor',
+        'demo.skype',
+        'demo.strings',
+        'demo.time',
+        'demo.upload',
+        'demo.youtube'
+    ])
+
+    .config(['$sceProvider', '$compileProvider', function($sceProvider, $compileProvider) {
+        $sceProvider.enabled(false);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|skype):/) ;
+    }])
+
+    .controller('MainCtrl', ['$scope', function($scope) {
+        $scope.modules = [
+            'api',
+            'confirm',
+            'dateRange',
+            'drag',
+            'dragdrop',
+            'mediaelement',
+            'modal',
+            'ngBindHtmlUnsafe',
+            'print',
+            'progress',
+            'redactor',
+            'skype',
+            'strings',
+            'time',
+            'upload',
+            'youtube'
+        ];
+    }])
+
+    .directive('scrollOnClick', [function() {
+        return {
+            restrict: 'A',
+            link: function(scope, $elm, attrs) {
+                var idToScroll = attrs.href;
+                $elm.on('click', function() {
+                    var $target;
+                    if (idToScroll) {
+                        $target = $(idToScroll);
+                    } else {
+                        $target = $elm;
+                    }
+
+                    $("body").animate({
+                        scrollTop: $target.offset().top
+                    }, "slow");
+                });
+            }
+        };
+    }]);
+
+})();
+
+
+(function() {
+
+    "use strict";
+
     angular.module('common.confirm', [])
 
     .directive('confirm', ['$document', function($document) {
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
-                var buttonId = Math.floor(Math.random() * 10000000000), 
-                    confirmMessage = attrs.confirmMessage || "", 
+                var buttonId = Math.floor(Math.random() * 10000000000),
+                    confirmMessage = attrs.confirmMessage || "",
                     confirmActionButton = attrs.confirmActionButton || "Yes",
                     confirmActionClass = attrs.confirmActionClass || "btn-danger",
                     confirmCancelButton = attrs.confirmCancelButton || "No",
                     confirmTitle = attrs.confirmTitle || "Confirm",
                     confirmPlacement = attrs.confirmPlacement || "top";
-                
+
                 attrs.buttonId = buttonId;
-                
+
                 var html = "<div class='popover-body' id='button-" + buttonId + "'>" +
                     "<span>" + confirmMessage + "</span>" +
-                    "<span class='confirm-action-button btn " + confirmActionClass + "'>" + confirmActionButton + "</span> " + 
-                    "<span class='confirm-cancel-button btn btn-default'>" + confirmCancelButton + "</span>" + 
+                    "<span class='confirm-action-button btn " + confirmActionClass + "'>" + confirmActionButton + "</span> " +
+                    "<span class='confirm-cancel-button btn btn-default'>" + confirmCancelButton + "</span>" +
                     "</div>";
 
                 element.popover({
@@ -2652,20 +2751,20 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                     html: true,
                     trigger: "manual",
                     title: confirmTitle,
-                    placement: confirmPlacement,
+                    placement: confirmPlacement
                 });
-    
+
                 element.bind('click', function(e) {
                     e.stopPropagation();
                     element.popover('show');
-                    
+
                     var pop = $("#button-" + buttonId);
-                    
+
                     pop.closest(".popover").click(function(e) {
                         e.preventDefault();
                         e.stopPropagation();
                     });
-                    
+
                     pop.find('.confirm-action-button').click(function() {
                         // this closes popover and doesn't conflict with popup directive
                         pop.closest('.popover').remove();
@@ -2674,13 +2773,13 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                             scope.$eval(attrs.confirm);
                         });
                     });
-                    
+
                     // just hide the popover from view
                     pop.find('.confirm-cancel-button').click(function() {
                         $document.off('click.confirm.' + buttonId);
                         pop.closest('.popover').remove();
                     });
-                    
+
                     // If you click the window excluding the popover close popover.
                     $document.on('click.confirm.' + buttonId, ":not(.popover, .popover *)", function() {
                         $document.off('click.confirm.' + buttonId);
@@ -2690,7 +2789,31 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
             }
         };
     }]);
-    
+
+})();
+
+(function() {
+
+    "use strict";
+
+    angular.module('demo.confirm', [
+        'common.confirm'
+    ])
+
+    .controller('DemoConfirmCtrl', ['$scope', function($scope) {
+        $scope.deleteObject = function() {
+            $scope.objectDeleted = "Twas deleted or whatever the function is you put here!";
+        };
+
+        $scope.codeExample = "<button\n" +
+        "   class='btn btn-default'\n" +
+        "   confirm='deleteObject(objectId)'\n" +
+        "   confirm-title='Delete this object?'\n" +
+        "   confirm-placement='left'>\n" +
+        "   Click Me\n" +
+        "</button>";
+    }]);
+
 })();
 
 (function() {
@@ -2767,6 +2890,54 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 })();
 
 (function() {
+
+    "use strict";
+
+    angular.module('demo.daterange', [
+        'common.dateRange'
+    ])
+
+    .controller('DemoDateRangeCtrl', ['$scope', function($scope) {
+        $scope.startDate = moment().subtract('days', 50).format("YYYY-MM-DD");
+        $scope.endDate = moment().format("YYYY-MM-DD");
+
+        $scope.dateRangeOptions = {
+            startDate: $scope.startDate,
+            endDate: $scope.endDate
+        };
+
+        $scope.updateDates = function(start, end) {
+            $scope.startDate = start;
+            $scope.endDate = end;
+        };
+
+        $scope.codeExample = "<button\n" +
+        "   date-range='dateRangeOptions'\n" +
+        "   ng-update='updateDates(start, end)'></button>";
+    }]);
+
+})();
+
+(function() {
+    
+    "use strict";
+    
+    angular.module('demo.drag', [
+        'common.drag'
+    ])
+
+    .controller('DemoDragCtrl', ['$scope', function($scope) {
+        $scope.object = {
+            top: 0,
+            left: 0
+        };
+        
+        $scope.codeExample = "<div drag='object'></div>";
+    }]);
+    
+})();
+
+(function() {
     
     "use strict";
     
@@ -2793,6 +2964,84 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
     }]);
 
 })();
+
+(function() {
+    
+    "use strict";
+    
+    angular.module('demo.dragdrop', [
+        'common.dragdrop'
+    ])
+
+    .controller('DemoDragDropCtrl', ['$scope', 'DragDropHandler', function($scope, DragDropHandler) {
+        $scope.items = [
+            {
+                id: 3,
+                name:'Item 1'
+            },
+            {
+                id: 4,
+                name:'Item 2'
+            },
+            {
+                id: 5,
+                name:'Item 3'
+            },
+            {
+                id: 6,
+                name:'Item 4'
+            }
+        ];
+              
+        $scope.objects = [
+            {
+                id: 1,
+                name: 'New Item 1'
+            },
+            {
+                id: 2,
+                name: 'New Item 2'
+            }
+        ];
+
+        $scope.codeExample = "<ul>\n" +
+            "   <li\n" +
+            "       ng-repeat='object in objects'\n" +
+            "       draggable='object'\n" +
+            "       draggable-target='#sortable'>\n" +
+            "       {{ object.name }}\n" +
+            "   </li>\n" +
+            "</ul>\n\n" +
+
+            "<ul\n" +
+            "   droppable='items'\n" +
+            "   ng-update='updateObjects(id, from, to)'\n" +
+            "   ng-create='createObject(object, to)'\n" +
+            "   id='sortable'>\n" +
+            "   <li ng-repeat='item in items track by item.id'>\n"+
+            "       {{ item.name }}\n" +
+            "   </li>\n" +
+        "</ul>";
+        
+        $scope.updateObjects = function(from, to) {
+            var itemIds = _.pluck($scope.items, 'id');
+            console.log(itemIds);
+        };
+
+        $scope.createObject = function(object, to) {
+            var newItem = angular.copy(object);
+            newItem.id = Math.ceil(Math.random() * 1000);
+            DragDropHandler.addObject(newItem, $scope.items, to);
+        };
+        
+        $scope.deleteItem = function(itemId) {
+            $scope.items = _.reject($scope.items, function(item) {
+                return item.id == itemId; 
+            });
+        };
+    }])
+    
+;})();
 
 (function() {
 
@@ -2878,6 +3127,29 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
     "use strict";
 
+    angular.module('demo.mediaelement', [
+        'common.mediaelement'
+    ])
+
+    .controller('DemoMediaelementCtrl', ['$scope', function($scope) {
+        $scope.mp4Video = 'http://playground.html5rocks.com/samples/html5_misc/chrome_japan.mp4';
+        $scope.codeExample = "<video\n" +
+        "   height='240'\n" +
+        "   width='100%'\n" +
+        "   preload='auto'\n" +
+        "   controls='controls'\n" +
+        "   poster='/images/square.png'\n" +
+        "   mediaelement>\n" +
+        "   <source type='video/mp4' ng-src='{{ mp4Video }}' />\n" +
+        "</video>";
+    }]);
+
+})();
+
+(function() {
+
+    "use strict";
+
     angular.module('common.mediaelement', [])
 
         .directive('mediaelement', ['$timeout', function($timeout) {
@@ -2933,6 +3205,24 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
 })();
 
+
+(function() {
+
+    "use strict";
+
+    angular.module('demo.modal', [
+        'common.modal'
+    ])
+
+    .controller('DemoModalCtrl', ['$scope', function($scope) {
+        $scope.codeExample = "<button\n" +
+        "   modal='modules/modal/demo/demo.modal.html'\n" +
+        "   class='btn btn-default'>\n" +
+        "   Open Modal\n" +
+        "</button>";
+    }]);
+
+})();
 
 (function() {
     
@@ -3004,6 +3294,22 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 })();
 
 (function() {
+
+    "use strict";
+
+    angular.module('demo.ngBindHtmlUnsafe', [
+        'common.ngBindHtmlUnsafe'
+    ])
+
+    .controller('DemoNgBindHtmlUnsafeCtrl', ['$scope', function($scope) {
+        $scope.html = "<pre><strong>Come at me bro!</strong></pre>";
+
+        $scope.codeExample = "<div ng-bind-html-unsafe='html'></div>";
+    }]);
+
+})();
+
+(function() {
     
     "use strict";
     
@@ -3019,6 +3325,26 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
     }]);
 
 }());
+
+(function() {
+
+    "use strict";
+
+    angular.module('demo.print', [
+        'demo.print'
+    ])
+
+    .controller('DemoPrintCtrl', ['$scope', function($scope) {
+        $scope.codeExample = "<button\n" +
+        "   class='btn btn-default'\n" +
+        "   print='#print-demo'\n" +
+        "   print-title='Print Demo'>\n" +
+        "   Print\n" +
+        "</button>\n\n" +
+        "<div id='print-demo'>Hey you there!</div>";
+    }]);
+
+})();
 
 (function() {
 
@@ -3053,6 +3379,309 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
     }]);
 
 })();
+
+(function() {
+
+    'use strict';
+
+    angular.module('demo.progress', [
+        'common.progress'
+    ])
+
+        .controller('DemoProgressCtrl', ['$scope', 'ProgressService', function($scope, ProgressService) {
+            $scope.ProgressService = ProgressService;
+            ProgressService.start('loadUser', 10);
+            ProgressService.start('loadTasks', 25);
+            ProgressService.done('loadUser');
+
+            $scope.codeExample = "$scope.ProgressService = ProgressService;\n" +
+                "ProgressService.start('loadUser', 10);\n" +
+                "ProgressService.start('loadTasks', 30);\n" +
+                "ProgressService.done('loadUser');";
+        }]);
+
+})();
+
+(function() {
+
+    'use strict';
+
+    angular.module('common.progress', [])
+
+        .factory('ProgressService', [function() {
+            var self = {};
+
+            self.processes = {};
+            self.pending = 0;
+            self.completed = 0;
+
+            self.start = function(name, units) {
+                self.processes[name] = {
+                    units: units,
+                    isDone: false
+                };
+
+                self.pending += +units;
+            };
+
+            self.done = function(name) {
+                self.processes[name].isDone = true;
+                self.completed += +self.processes[name].units;
+            };
+
+            self.get = function() {
+                return +self.pending === 0 ? 0 : Math.ceil(+self.completed / +self.pending * 100);
+            };
+
+            self.reset = function() {
+                self.processes = {};
+                self.completed = 0;
+                self.pending = 0;
+            };
+
+            return self;
+        }]);
+
+})();
+
+(function() {
+
+    "use strict";
+
+    angular.module('demo.redactor', [
+        'common.redactor'
+    ])
+
+    .controller('DemoRedactorCtrl', ['$scope', function($scope) {
+        $scope.myText = "Hello you!";
+        $scope.codeExample = "<textarea\n" +
+        "   redactor\n" +
+        "   ng-model='myText'></textarea>";
+    }]);
+
+})();
+
+
+if (!RedactorPlugins) var RedactorPlugins = {};
+
+RedactorPlugins.fontcolor = {
+	init: function()
+	{
+		var colors = ['#ffffff', '#000000', '#eeece1', '#1f497d', '#4f81bd', '#c0504d', '#9bbb59', '#8064a2', '#4bacc6', '#f79646', '#ffff00', '#f2f2f2', '#7f7f7f', '#ddd9c3', '#c6d9f0', '#dbe5f1', '#f2dcdb', '#ebf1dd', '#e5e0ec', '#dbeef3', '#fdeada', '#fff2ca', '#d8d8d8', '#595959', '#c4bd97', '#8db3e2', '#b8cce4', '#e5b9b7', '#d7e3bc', '#ccc1d9', '#b7dde8', '#fbd5b5', '#ffe694', '#bfbfbf', '#3f3f3f', '#938953', '#548dd4', '#95b3d7', '#d99694', '#c3d69b', '#b2a2c7', '#b7dde8', '#fac08f', '#f2c314', '#a5a5a5', '#262626', '#494429', '#17365d', '#366092', '#953734', '#76923c', '#5f497a', '#92cddc', '#e36c09', '#c09100', '#7f7f7f', '#0c0c0c', '#1d1b10', '#0f243e', '#244061', '#632423', '#4f6128', '#3f3151', '#31859b', '#974806', '#7f6000'];
+		var buttons = ['fontcolor', 'backcolor'];
+
+		this.buttonAddSeparator();
+
+		for (var i = 0; i < 2; i++)
+		{
+			var name = buttons[i];
+
+			var $dropdown = $('<div class="redactor_dropdown redactor_dropdown_box_' + name + '" style="display: none; width: 210px;">');
+
+			this.pickerBuild($dropdown, name, colors);
+			$(this.$toolbar).append($dropdown);
+
+			this.buttonAdd(name, this.opts.curLang[name], $.proxy(function(btnName, $button, btnObject, e)
+			{
+				this.dropdownShow(e, btnName);
+
+			}, this));
+		}
+	},
+	pickerBuild: function($dropdown, name, colors)
+	{
+		var rule = 'color';
+		if (name === 'backcolor') rule = 'background-color';
+
+		var _self = this;
+		var onSwatch = function(e)
+		{
+			e.preventDefault();
+
+			var $this = $(this);
+			_self.pickerSet($this.data('rule'), $this.attr('rel'));
+
+		}
+
+		var len = colors.length;
+		for (var z = 0; z < len; z++)
+		{
+			var color = colors[z];
+
+			var $swatch = $('<a rel="' + color + '" data-rule="' + rule +'" href="#" style="float: left; font-size: 0; border: 2px solid #fff; padding: 0; margin: 0; width: 15px; height: 15px;"></a>');
+			$swatch.css('background-color', color);
+			$dropdown.append($swatch);
+			$swatch.on('click', onSwatch);
+		}
+
+		var $elNone = $('<a href="#" style="display: block; clear: both; padding: 4px 0; font-size: 11px; line-height: 1;"></a>')
+		.html(this.opts.curLang.none)
+		.on('click', function(e)
+		{
+			e.preventDefault();
+			_self.pickerSet(rule, false);
+		});
+
+		$dropdown.append($elNone);
+	},
+	pickerSet: function(rule, type)
+	{
+		this.bufferSet();
+
+		this.$editor.focus();
+		this.inlineRemoveStyle(rule);
+		if (type !== false) this.inlineSetStyle(rule, type);
+		if (this.opts.air) this.$air.fadeOut(100);
+		this.sync();
+	}
+};
+
+if (!RedactorPlugins) var RedactorPlugins = {};
+
+RedactorPlugins.fullscreen = {
+	init: function()
+	{
+		this.fullscreen = false;
+
+		this.buttonAdd('fullscreen', 'Fullscreen', $.proxy(this.toggleFullscreen, this));
+		this.buttonSetRight('fullscreen');
+
+		if (this.opts.fullscreen) this.toggleFullscreen();
+	},
+	toggleFullscreen: function()
+	{
+		var html;
+
+		if (!this.fullscreen)
+		{
+			this.buttonChangeIcon('fullscreen', 'normalscreen');
+			this.buttonActive('fullscreen');
+			this.fullscreen = true;
+
+			if (this.opts.toolbarExternal)
+			{
+				this.toolcss = {};
+				this.boxcss = {};
+				this.toolcss.width = this.$toolbar.css('width');
+				this.toolcss.top = this.$toolbar.css('top');
+				this.toolcss.position = this.$toolbar.css('position');
+				this.boxcss.top = this.$box.css('top');
+			}
+
+			this.fsheight = this.$editor.height();
+
+			if (this.opts.iframe) html = this.get();
+
+			this.tmpspan = $('<span></span>');
+			this.$box.addClass('redactor_box_fullscreen').after(this.tmpspan);
+
+			$('body, html').css('overflow', 'hidden');
+			$('body').prepend(this.$box);
+
+			if (this.opts.iframe) this.fullscreenIframe(html);
+
+			this.fullScreenResize();
+			$(window).resize($.proxy(this.fullScreenResize, this));
+			$(document).scrollTop(0, 0);
+
+			this.focus();
+			this.observeStart();
+
+		}
+		else
+		{
+			this.buttonRemoveIcon('fullscreen', 'normalscreen');
+			this.buttonInactive('fullscreen');
+			this.fullscreen = false;
+
+			$(window).off('resize', $.proxy(this.fullScreenResize, this));
+			$('body, html').css('overflow', '');
+
+			this.$box.removeClass('redactor_box_fullscreen').css({ width: 'auto', height: 'auto' });
+
+			if (this.opts.iframe) html = this.$editor.html();
+			this.tmpspan.after(this.$box).remove();
+
+			if (this.opts.iframe) this.fullscreenIframe(html);
+			else this.sync();
+
+			var height = this.fsheight;
+			if (this.opts.autoresize) height = 'auto';
+
+			if (this.opts.toolbarExternal)
+			{
+				this.$box.css('top', this.boxcss.top);
+				this.$toolbar.css({
+					'width': this.toolcss.width,
+					'top': this.toolcss.top,
+					'position': this.toolcss.position
+				});
+			}
+
+			if (!this.opts.iframe) this.$editor.css('height', height);
+			else this.$frame.css('height', height);
+
+			this.$editor.css('height', height);
+			this.focus();
+			this.observeStart();
+		}
+	},
+	fullscreenIframe: function(html)
+	{
+		this.$editor = this.$frame.contents().find('body').attr({
+			'contenteditable': true,
+			'dir': this.opts.direction
+		});
+
+		// set document & window
+		if (this.$editor[0])
+		{
+			this.document = this.$editor[0].ownerDocument;
+			this.window = this.document.defaultView || window;
+		}
+
+		// iframe css
+		this.iframeAddCss();
+
+		if (this.opts.fullpage) this.setFullpageOnInit(html);
+		else this.set(html);
+
+		if (this.opts.wym) this.$editor.addClass('redactor_editor_wym');
+	},
+	fullScreenResize: function()
+	{
+		if (!this.fullscreen) return false;
+
+		var toolbarHeight = this.$toolbar.height();
+
+		var pad = this.$editor.css('padding-top').replace('px', '');
+		var height = $(window).height() - toolbarHeight;
+		this.$box.width($(window).width() - 2).height(height + toolbarHeight);
+
+		if (this.opts.toolbarExternal)
+		{
+			this.$toolbar.css({
+				'top': '0px',
+				'position': 'absolute',
+				'width': '100%'
+			});
+
+			this.$box.css('top', toolbarHeight + 'px');
+		}
+
+		if (!this.opts.iframe) this.$editor.height(height - (pad * 2));
+		else
+		{
+			setTimeout($.proxy(function()
+			{
+				this.$frame.height(height);
+
+			}, this), 1);
+		}
+
+		this.$editor.height(height);
+	}
+};
 
 (function() {
     
@@ -3105,6 +3734,23 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
 (function() {
 
+    "use strict";
+
+    angular.module('demo.skype', [
+        'common.skype'
+    ])
+
+    .controller('DemoSkypeCtrl', ['$scope', function($scope) {
+        $scope.phoneNumber = "(425) 897 - 7897";
+        $scope.codeExample = "<a href='{{ phoneNumber | skype }}'>\n" +
+        "   {{ phoneNumber | skype }}\n" +
+        "</a>";
+    }]);
+
+})();
+
+(function() {
+
     'use strict';
 
     angular.module('common.skype', [])
@@ -3123,6 +3769,31 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
             return 'skype:+1' + value + '?call';
         };
+    }]);
+
+})();
+
+(function() {
+
+    "use strict";
+
+    angular.module('demo.strings', [
+        'common.strings'
+    ])
+
+    .controller('DemoStringsCtrl', ['$scope', function($scope) {
+        $scope.examples = {
+            slugify: "my blog example here",
+            stripHtml: "<p>test</p>"
+        };
+
+        $scope.codeExample = "{{ 'title case' | titleCase }}\n" +
+        "{{ 'Lower Case' | lowerCase }}\n" +
+        "{{ 'nl\\nbr' | nl2br }}\n" +
+        "{{ 'I soooo loooonnnggggg' | truncate:15 }}\n" +
+        "{{ 'http://www.google.com' | encodeURIComponent }}\n" +
+        "{{ htmlString | stripHtml }}\n" +
+        "<input type='text' ng-model='examples.slugify' slugify>";
     }]);
 
 })();
@@ -3288,6 +3959,23 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
     "use strict";
 
+    angular.module('demo.time', [
+        'common.time'
+    ])
+
+    .controller('DemoTimeCtrl', ['$scope', function($scope) {
+        $scope.timeExample = moment().format("YYYY-MM-DD H:mm:ss");
+        $scope.codeExample = "{{ timeExample | moment:'MMM D, YYYY - h:mma' }}\n" +
+        "{{ timeExample | fromNow }}\n" +
+        "{{ timeExample | smallFromNow }}";
+    }]);
+
+})();
+
+(function() {
+
+    "use strict";
+
     angular.module('common.time', [])
 
     .filter('moment', [function() {
@@ -3303,13 +3991,13 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
     }])
 
     .filter('smallFromNow', [function() {
-        return function(input, p_allowFuture) {
+        return function(input, nowTime, p_allowFuture) {
             var substitute = function (stringOrFunction, number, strings) {
                     var string = $.isFunction(stringOrFunction) ? stringOrFunction(number, dateDifference) : stringOrFunction;
                     var value = (strings.numbers && strings.numbers[number]) || number;
                     return string.replace(/%d/i, value);
                 },
-                nowTime = (new Date()).getTime(),
+                nowTime = (new Date(nowTime)).getTime() || (new Date()).getTime(),
                 date = (new Date(input)).getTime(),
                 //refreshMillis= 6e4, //A minute
                 allowFuture = p_allowFuture || false,
@@ -3364,6 +4052,30 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
             return $.trim([prefix, words, suffix].join(separator));
         };
+    }]);
+
+})();
+
+(function() {
+
+    "use strict";
+
+    angular.module('demo.upload', [
+        'common.upload'
+    ])
+
+    .controller('DemoUploadCtrl', ['$scope', function($scope) {
+        $scope.fileUploaded = function(data) {
+            console.log(data);
+        };
+
+        $scope.codeExample = "<button\n" +
+        "   class='btn btn-default'\n" +
+        "   ng-model='newFile.filename'\n" +
+        "   ng-change='optionFileUploaded(data)'\n" +
+        "   upload='\"/your/upload/location\"'>\n" +
+        "   Choose Image\n" +
+        "</button>";
     }]);
 
 })();
@@ -3469,489 +4181,6 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
     "use strict";
 
-    angular.module('common.youtube', [])
-
-
-    .service('Youtube', [function() {
-        var regex = /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/;
-
-        return {
-            regex: function() {
-                return regex;
-            }
-        };
-    }])
-
-    .filter('youtubeIframe', ['$filter', 'Youtube', function($filter, Youtube){
-        return function (value) {
-            if (!value) {
-                return value;
-            }
-
-            var videoid = value.match(Youtube.regex());
-
-            if (videoid === null) {
-                return "";
-            }
-
-            return "//www.youtube.com/embed/" + videoid[1];
-        };
-    }])
-
-    .filter('youtubeImage', ['$filter', 'Youtube', function($filter, Youtube){
-        return function (value) {
-            if (!value) {
-                return value;
-            }
-
-            var videoid = value.match(Youtube.regex());
-
-            if (videoid === null) {
-                return "";
-            }
-
-            return "//i2.ytimg.com/vi/" + videoid[1] + "/mqdefault.jpg";
-        };
-    }]);
-
-})();
-
-
-(function() {
-
-    "use strict";
-
-    angular.module('angular-common', [
-        'demo.api',
-        'demo.confirm',
-        'demo.daterange',
-        'demo.drag',
-        'demo.dragdrop',
-        'demo.mediaelement',
-        'demo.modal',
-        'demo.ngBindHtmlUnsafe',
-        'demo.print',
-        'demo.redactor',
-        'demo.skype',
-        'demo.strings',
-        'demo.time',
-        'demo.upload',
-        'demo.youtube'
-    ])
-
-    .config(['$sceProvider', '$compileProvider', function($sceProvider, $compileProvider) {
-        $sceProvider.enabled(false);
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|skype):/) ;
-    }])
-
-    .controller('MainCtrl', ['$scope', function($scope) {
-        $scope.modules = [
-            'api',
-            'confirm',
-            'dateRange',
-            'drag',
-            'dragdrop',
-            'mediaelement',
-            'modal',
-            'ngBindHtmlUnsafe',
-            'print',
-            'redactor',
-            'skype',
-            'strings',
-            'time',
-            'upload',
-            'youtube'
-        ];
-    }])
-
-    .directive('scrollOnClick', [function() {
-        return {
-            restrict: 'A',
-            link: function(scope, $elm, attrs) {
-                var idToScroll = attrs.href;
-                $elm.on('click', function() {
-                    var $target;
-                    if (idToScroll) {
-                        $target = $(idToScroll);
-                    } else {
-                        $target = $elm;
-                    }
-
-                    $("body").animate({
-                        scrollTop: $target.offset().top
-                    }, "slow");
-                });
-            }
-        };
-    }]);
-
-})();
-
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.api', [
-        'common.api'
-    ])
-
-    .controller('DemoApiCtrl', ['$scope', 'Api', function($scope, Api) {
-        Api.setBase('http://api.randomuser.me/');
-        $scope.results = 1;
-
-        $scope.loadRandomUser = function() {
-            Api.get('', {
-                results: $scope.results
-            }).success(function(data) {
-                $scope.randomUsers = data;
-            });
-        };
-
-        $scope.codeExample = "Api.setBase('/api/v1/');\n\n" +
-
-        "$scope.loadUser = function(userId, filters) {\n" +
-        "   Api.get('user/' + userId, {\n" +
-        "       filters: filters\n" +
-        "   }).success(function(data) {\n" +
-        "       $scope.data = data;\n" +
-        "   });\n" +
-        "};";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.confirm', [
-        'common.confirm'
-    ])
-
-    .controller('DemoConfirmCtrl', ['$scope', function($scope) {
-        $scope.deleteObject = function() {
-            $scope.objectDeleted = "Twas deleted or whatever the function is you put here!";
-        };
-
-        $scope.codeExample = "<button\n" +
-        "   class='btn btn-default'\n" +
-        "   confirm='deleteObject(objectId)'\n" +
-        "   confirm-title='Delete this object?'\n" +
-        "   confirm-placement='left'>\n" +
-        "   Click Me\n" +
-        "</button>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.daterange', [
-        'common.dateRange'
-    ])
-
-    .controller('DemoDateRangeCtrl', ['$scope', function($scope) {
-        $scope.startDate = moment().subtract('days', 50).format("YYYY-MM-DD");
-        $scope.endDate = moment().format("YYYY-MM-DD");
-
-        $scope.dateRangeOptions = {
-            startDate: $scope.startDate,
-            endDate: $scope.endDate
-        };
-
-        $scope.updateDates = function(start, end) {
-            $scope.startDate = start;
-            $scope.endDate = end;
-        };
-
-        $scope.codeExample = "<button\n" +
-        "   date-range='dateRangeOptions'\n" +
-        "   ng-update='updateDates(start, end)'></button>";
-    }]);
-
-})();
-
-(function() {
-    
-    "use strict";
-    
-    angular.module('demo.drag', [
-        'common.drag'
-    ])
-
-    .controller('DemoDragCtrl', ['$scope', function($scope) {
-        $scope.object = {
-            top: 0,
-            left: 0
-        };
-        
-        $scope.codeExample = "<div drag='object'></div>";
-    }]);
-    
-})();
-
-(function() {
-    
-    "use strict";
-    
-    angular.module('demo.dragdrop', [
-        'common.dragdrop'
-    ])
-
-    .controller('DemoDragDropCtrl', ['$scope', 'DragDropHandler', function($scope, DragDropHandler) {
-        $scope.items = [
-            {
-                id: 3,
-                name:'Item 1'
-            },
-            {
-                id: 4,
-                name:'Item 2'
-            },
-            {
-                id: 5,
-                name:'Item 3'
-            },
-            {
-                id: 6,
-                name:'Item 4'
-            }
-        ];
-              
-        $scope.objects = [
-            {
-                id: 1,
-                name: 'New Item 1'
-            },
-            {
-                id: 2,
-                name: 'New Item 2'
-            }
-        ];
-
-        $scope.codeExample = "<ul>\n" +
-            "   <li\n" +
-            "       ng-repeat='object in objects'\n" +
-            "       draggable='object'\n" +
-            "       draggable-target='#sortable'>\n" +
-            "       {{ object.name }}\n" +
-            "   </li>\n" +
-            "</ul>\n\n" +
-
-            "<ul\n" +
-            "   droppable='items'\n" +
-            "   ng-update='updateObjects(id, from, to)'\n" +
-            "   ng-create='createObject(object, to)'\n" +
-            "   id='sortable'>\n" +
-            "   <li ng-repeat='item in items track by item.id'>\n"+
-            "       {{ item.name }}\n" +
-            "   </li>\n" +
-        "</ul>";
-        
-        $scope.updateObjects = function(from, to) {
-            var itemIds = _.pluck($scope.items, 'id');
-            console.log(itemIds);
-        };
-
-        $scope.createObject = function(object, to) {
-            var newItem = angular.copy(object);
-            newItem.id = Math.ceil(Math.random() * 1000);
-            DragDropHandler.addObject(newItem, $scope.items, to);
-        };
-        
-        $scope.deleteItem = function(itemId) {
-            $scope.items = _.reject($scope.items, function(item) {
-                return item.id == itemId; 
-            });
-        };
-    }])
-    
-;})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.mediaelement', [
-        'common.mediaelement'
-    ])
-
-    .controller('DemoMediaelementCtrl', ['$scope', function($scope) {
-        $scope.mp4Video = 'http://playground.html5rocks.com/samples/html5_misc/chrome_japan.mp4';
-        $scope.codeExample = "<video\n" +
-        "   height='240'\n" +
-        "   width='100%'\n" +
-        "   preload='auto'\n" +
-        "   controls='controls'\n" +
-        "   poster='/images/square.png'\n" +
-        "   mediaelement>\n" +
-        "   <source type='video/mp4' ng-src='{{ mp4Video }}' />\n" +
-        "</video>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.modal', [
-        'common.modal'
-    ])
-
-    .controller('DemoModalCtrl', ['$scope', function($scope) {
-        $scope.codeExample = "<button\n" +
-        "   modal='modules/modal/demo/demo.modal.html'\n" +
-        "   class='btn btn-default'>\n" +
-        "   Open Modal\n" +
-        "</button>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.ngBindHtmlUnsafe', [
-        'common.ngBindHtmlUnsafe'
-    ])
-
-    .controller('DemoNgBindHtmlUnsafeCtrl', ['$scope', function($scope) {
-        $scope.html = "<pre><strong>Come at me bro!</strong></pre>";
-
-        $scope.codeExample = "<div ng-bind-html-unsafe='html'></div>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.print', [
-        'demo.print'
-    ])
-
-    .controller('DemoPrintCtrl', ['$scope', function($scope) {
-        $scope.codeExample = "<button\n" +
-        "   class='btn btn-default'\n" +
-        "   print='#print-demo'\n" +
-        "   print-title='Print Demo'>\n" +
-        "   Print\n" +
-        "</button>\n\n" +
-        "<div id='print-demo'>Hey you there!</div>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.redactor', [
-        'common.redactor'
-    ])
-
-    .controller('DemoRedactorCtrl', ['$scope', function($scope) {
-        $scope.myText = "Hello you!";
-        $scope.codeExample = "<textarea\n" +
-        "   redactor\n" +
-        "   ng-model='myText'></textarea>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.skype', [
-        'common.skype'
-    ])
-
-    .controller('DemoSkypeCtrl', ['$scope', function($scope) {
-        $scope.phoneNumber = "(425) 897 - 7897";
-        $scope.codeExample = "<a href='{{ phoneNumber | skype }}'>\n" +
-        "   {{ phoneNumber | skype }}\n" +
-        "</a>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.strings', [
-        'common.strings'
-    ])
-
-    .controller('DemoStringsCtrl', ['$scope', function($scope) {
-        $scope.examples = {
-            slugify: "my blog example here",
-            stripHtml: "<p>test</p>"
-        };
-
-        $scope.codeExample = "{{ 'title case' | titleCase }}\n" +
-        "{{ 'Lower Case' | lowerCase }}\n" +
-        "{{ 'nl\\nbr' | nl2br }}\n" +
-        "{{ 'I soooo loooonnnggggg' | truncate:15 }}\n" +
-        "{{ 'http://www.google.com' | encodeURIComponent }}\n" +
-        "{{ htmlString | stripHtml }}\n" +
-        "<input type='text' ng-model='examples.slugify' slugify>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.time', [
-        'common.time'
-    ])
-
-    .controller('DemoTimeCtrl', ['$scope', function($scope) {
-        $scope.timeExample = moment().format("YYYY-MM-DD H:mm:ss");
-        $scope.codeExample = "{{ timeExample | moment:'MMM D, YYYY - h:mma' }}\n" +
-        "{{ timeExample | fromNow }}\n" +
-        "{{ timeExample | smallFromNow }}";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
-    angular.module('demo.upload', [
-        'common.upload'
-    ])
-
-    .controller('DemoUploadCtrl', ['$scope', function($scope) {
-        $scope.fileUploaded = function(data) {
-            console.log(data);
-        };
-
-        $scope.codeExample = "<button\n" +
-        "   class='btn btn-default'\n" +
-        "   ng-model='newFile.filename'\n" +
-        "   ng-change='optionFileUploaded(data)'\n" +
-        "   upload='\"/your/upload/location\"'>\n" +
-        "   Choose Image\n" +
-        "</button>";
-    }]);
-
-})();
-
-(function() {
-
-    "use strict";
-
     angular.module('demo.youtube', [
         'common.youtube'
     ])
@@ -3961,5 +4190,57 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
         $scope.codeExample1 = "<img ng-src='{{ youtubeUrl | youtubeImage }}'>";
         $scope.codeExample2 = "<iframe frameborder='0' ng-src='{{ youtubeUrl | youtubeIframe }}'></iframe>";
     }]);
+
+})();
+
+(function() {
+
+    "use strict";
+
+    angular.module('common.youtube', [])
+
+        .service('Youtube', [function() {
+            var regex = /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/;
+
+            return {
+                regex: function() {
+                    return regex;
+                }
+            };
+        }])
+
+        .filter('youtubeIframe', ['$filter', 'Youtube', function($filter, Youtube){
+            return function (value) {
+                if (!value) {
+                    return value;
+                }
+
+                var videoid = value.match(Youtube.regex());
+
+                if (videoid === null) {
+                    return "";
+                }
+
+                return "//www.youtube.com/embed/" + videoid[1];
+            };
+        }])
+
+        .filter('youtubeImage', ['$filter', 'Youtube', function($filter, Youtube){
+            return function (value, quality) {
+                quality = quality || 'default';
+
+                if (!value) {
+                    return value;
+                }
+
+                var videoid = value.match(Youtube.regex());
+
+                if (videoid === null) {
+                    return "";
+                }
+
+                return "https://img.youtube.com/vi/" + videoid[1] + "/" + quality + ".jpg";
+            };
+        }]);
 
 })();

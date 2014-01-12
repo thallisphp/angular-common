@@ -19,40 +19,8 @@
                         './bower_components/bootstrap-daterangepicker/daterangepicker.js',
                         './bower_components/angular/angular.min.js',
 
-                        './modules/api/api.js',
-                        './modules/confirm/confirm.js',
-                        './modules/dateRange/dateRange.js',
-                        './modules/drag/drag.js',
-                        './modules/dragdrop/dragdrop.js',
-                        './modules/fullscreen/fullscreen.js',
-                        './modules/mediaelement/mediaelement.js',
-                        './modules/modal/modal.js',
-                        './modules/ngBindHtmlUnsafe/ngBindHtmlUnsafe.js',
-                        './modules/print/print.js',
-                        './modules/redactor/redactor.js',
-                        './modules/skype/skype.js',
-                        './modules/strings/strings.js',
-                        './modules/time/time.js',
-                        './modules/upload/upload.js',
-                        './modules/youtube/youtube.js',
-
-                        './modules/app.js',
-                        './modules/api/demo/demo-api.js',
-                        './modules/confirm/demo/demo-confirm.js',
-                        "./modules/dateRange/demo/demo-daterange.js",
-                        "./modules/drag/demo/demo-drag.js",
-                        "./modules/dragdrop/demo/demo-dragdrop.js",
-                        "./modules/fullscreen/demo/demo-fullscreen.js",
-                        "./modules/mediaelement/demo/demo-mediaelement.js",
-                        "./modules/modal/demo/demo-modal.js",
-                        "./modules/ngBindHtmlUnsafe/demo/demo-ngbindhtmlunsafe.js",
-                        "./modules/print/demo/demo-print.js",
-                        "./modules/redactor/demo/demo-redactor.js",
-                        "./modules/skype/demo/demo-skype.js",
-                        "./modules/strings/demo/demo-strings.js",
-                        "./modules/time/demo/demo-time.js",
-                        "./modules/upload/demo/demo-upload.js",
-                        "./modules/youtube/demo/demo-youtube.js"
+                        'modules/**/*.js',
+                        '!modules/**/*Spec.js'
                     ],
                     dest: './build/angular-common.js'
                 }
@@ -73,7 +41,9 @@
                     browsers: ['PhantomJS']
                 },
                 chrome: {
-                    browsers: ['PhantomJS']
+                    browsers: ['Chrome'],
+                    singleRun: false,
+                    autoWatch: true
                 }
             }
         });
