@@ -14,16 +14,6 @@ A collection of useful directives, filters, and services for Angular JS.
 bower install angular-common
 ```
 
-## Building
-
-There is a `Gruntfile.js` you can use to build your own version.  By default there is raw and minified build under the `build` folder.
-
-[Getting Started with Grunt](http://gruntjs.com/getting-started)
-
-1. Change to the project's root directory.
-2. Install project dependencies with `npm install`.
-3. Run Grunt with `grunt`.
-
 ## Usage
 
 ```
