@@ -3388,11 +3388,24 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
         'common.progress'
     ])
 
-        .controller('DemoProgressCtrl', ['$scope', 'ProgressService', function($scope, ProgressService) {
+        .controller('DemoProgressCtrl', ['$scope', 'ProgressService', '$timeout', function($scope, ProgressService, $timeout) {
             $scope.ProgressService = ProgressService;
-            ProgressService.start('loadUser', 10);
-            ProgressService.start('loadTasks', 25);
-            ProgressService.done('loadUser');
+            $scope.startProgress = function() {
+                ProgressService.start('loadUser', 10);
+                $timeout(function() {
+                    ProgressService.done('loadUser');
+                }, 1000);
+
+                ProgressService.start('loadExample', 25);
+                $timeout(function() {
+                    ProgressService.done('loadExample');
+                }, 2500);
+
+                ProgressService.start('loadTasks', 25);
+                $timeout(function() {
+                    ProgressService.done('loadTasks');
+                }, 5000);
+            };
 
             $scope.codeExample = "$scope.ProgressService = ProgressService;\n" +
                 "ProgressService.start('loadUser', 10);\n" +

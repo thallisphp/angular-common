@@ -11,15 +11,15 @@ describe('Common Progress |', function() {
     }));
 
     it('should complete basic arthimetic', function() {
-        progressService.start('loadUser', 25);
-        progressService.start('loadWhatever', 25);
-        expect(progressService.processes['loadUser'].units).toBe(25);
-        progressService.done('loadUser');
-        expect(progressService.get()).toBe(50);
+        progressService.start('loadUser', 10);
+        progressService.start('loadWhatever', 30);
+        progressService.start('loadTest', 80);
 
-        progressService.start('loadPrime', 33);
-        progressService.done('loadPrime');
-        expect(progressService.get()).toBe(70);
+        progressService.done('loadUser');
+        progressService.done('loadWhatever');
+        progressService.done('loadTest');
+
+        expect(progressService.get()).toBe(100);
     });
 
     it('should complete a process after $http is done', function() {
