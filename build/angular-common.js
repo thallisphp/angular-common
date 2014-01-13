@@ -3168,7 +3168,7 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                     strokeWidth: '=?'
                 },
                 link: function(scope, element){
-                    scope.strokeWidth = scope.strokeWidth || 5;
+                    scope.strokeWidth = scope.strokeWidth || 3;
                     scope.strokeColor = scope.strokeColor || '#343536';
 
                     var canvas = element[0];
@@ -3479,7 +3479,7 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                     function getHtml() {
                         return $(attrs.print).html();
                     }
-                    console.log(1);
+
                     element.click(function() {
                         var data = getHtml();
                         var mywindow = window.open('', attrs.printTitle, 'height=400,width=800');

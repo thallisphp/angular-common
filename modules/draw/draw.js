@@ -13,7 +13,7 @@
                     strokeWidth: '=?'
                 },
                 link: function(scope, element){
-                    scope.strokeWidth = scope.strokeWidth || 5;
+                    scope.strokeWidth = scope.strokeWidth || 3;
                     scope.strokeColor = scope.strokeColor || '#343536';
 
                     var canvas = element[0];

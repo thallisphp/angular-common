@@ -10,7 +10,7 @@
                     function getHtml() {
                         return $(attrs.print).html();
                     }
-                    console.log(1);
+
                     element.click(function() {
                         var data = getHtml();
                         var mywindow = window.open('', attrs.printTitle, 'height=400,width=800');
