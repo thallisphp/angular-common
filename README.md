@@ -2,12 +2,11 @@
 
 A collection of useful directives, filters, and services for Angular JS.
 
-[Updates: @michaeljcalkins](https://twitter.com/michaeljcalkins)
-
 [Docs and Examples](http://clouddueling.github.io/angular-common/)
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge") [![Build Status](https://travis-ci.org/clouddueling/angular-common.png?branch=master)](https://travis-ci.org/clouddueling/angular-common)
+[@michaeljcalkins](https://twitter.com/michaeljcalkins)
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/clouddueling/angular-common/trend.png)](https://bitdeli.com/free "Bitdeli Badge") [![Build Status](https://travis-ci.org/clouddueling/angular-common.png?branch=master)](https://travis-ci.org/clouddueling/angular-common)
 
 ## Install
 
@@ -28,66 +27,34 @@ There is a `Gruntfile.js` you can use to build your own version.  By default the
 ## Usage
 
 ```
-(function() {
-
-    'use strict';
-
-    angular.module('app', [
-        'common.api',
-        'common.confirm',
-        'common.dateRange',
-        'common.drag',
-        'common.dragdrop',
-        'common.draw',
-        'common.mediaelement',
-        'common.modal',
-        'common.ngBindHtmlUnsafe',
-        'common.progress',
-        'common.print',
-        'common.redactor',
-        'common.skype',
-        'common.strings',
-        'common.time',
-        'common.upload',
-        'common.youtube'
-    ]);
-
-})();
+angular.module('app', [
+    'common.api',
+    'common.confirm',
+    'common.dateRange',
+    'common.drag',
+    'common.dragdrop',
+    'common.draw',
+    'common.mediaelement',
+    'common.modal',
+    'common.ngBindHtmlUnsafe',
+    'common.progress',
+    'common.print',
+    'common.redactor',
+    'common.skype',
+    'common.strings',
+    'common.time',
+    'common.upload',
+    'common.youtube'
+]);
 ```
 
-Instead of writing all of that out you can create a single reference point by editing the /modules/common/common.js file that includes all the modules.
+We recommend you can create a module that includes all the modules you want to use and just reference that `pointer` module.
 
 ```
-(function() {
-
-    'use strict';
-
-    angular.module('app', [
-        'common.master'
-    ]);
-
-})();
+angular.module('app', [
+    'common.master'
+]);
 ```
-
-## Building
-
-```
-grunt
-```
-
-## Running Tests
-
-Run once:
-```
-grunt test
-```
-
-Watch for changes:
-```
-karam start karma.conf.js
-```
-
-
 
 ## Demo
 
@@ -103,7 +70,7 @@ node server.js
 php -S localhost:8888
 ```
 
-<a href='http://localhost:8000'>http://localhost:8888</a>
+<a href='http://localhost:8000'>http://localhost:8000</a>
 
 ## Roadmap
 
