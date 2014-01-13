@@ -45,6 +45,12 @@
                     singleRun: false,
                     autoWatch: true
                 }
+            },
+            watch: {
+                js: {
+                    files: ['modules/**/*.js'],
+                    tasks: ['concat:javascript', 'uglify']
+                }
             }
         });
 

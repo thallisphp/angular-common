@@ -3331,7 +3331,7 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
     "use strict";
 
     angular.module('demo.print', [
-        'demo.print'
+        'common.print'
     ])
 
     .controller('DemoPrintCtrl', ['$scope', function($scope) {
@@ -3352,31 +3352,31 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
     angular.module('common.print', [])
 
-    .directive('print', ['$timeout', function($timeout) {
-        return {
-            link: function(scope, element, attrs) {
-                function getHtml() {
-                    return $(attrs.print).html();
+        .directive('print', ['$timeout', function($timeout) {
+            return {
+                link: function(scope, element, attrs) {
+                    function getHtml() {
+                        return $(attrs.print).html();
+                    }
+                    console.log(1);
+                    element.click(function() {
+                        var data = getHtml();
+                        var mywindow = window.open('', attrs.printTitle, 'height=400,width=800');
+
+                        mywindow.document.write('<html><head><title>' + attrs.printTitle + '</title>');
+                        mywindow.document.write('<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css" />');
+                        mywindow.document.write('</head><body >' + data + '</body></html>');
+                        mywindow.print();
+
+                        $timeout(function() {
+                            mywindow.close();
+                        }, 10);
+
+                        return true;
+                    });
                 }
-
-                element.click(function() {
-                    var data = getHtml();
-                    var mywindow = window.open('', attrs.printTitle, 'height=400,width=800');
-
-                    mywindow.document.write('<html><head><title>' + attrs.printTitle + '</title>');
-                    mywindow.document.write('<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" type="text/css" />');
-                    mywindow.document.write('</head><body >' + data + '</body></html>');
-                    mywindow.print();
-
-                    $timeout(function() {
-                        mywindow.close();
-                    }, 10);
-
-                    return true;
-                });
-            }
-        };
-    }]);
+            };
+        }]);
 
 })();
 

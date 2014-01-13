@@ -3,7 +3,7 @@
     "use strict";
 
     angular.module('demo.print', [
-        'demo.print'
+        'common.print'
     ])
 
     .controller('DemoPrintCtrl', ['$scope', function($scope) {
