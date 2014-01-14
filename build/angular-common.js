@@ -3173,7 +3173,6 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
 
                     var canvas = element[0];
                     var ctx = canvas.getContext('2d')
-                    ctx.lineCap = 'round';
 
                     // variable that decides if something should be drawn on mousemove
                     var drawing = false;
@@ -3210,6 +3209,12 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                         lastY = event.offsetY;
                     });
 
+                    scope.$watch('ngModel', function(newVal, oldVal) {
+                        if (newVal.length === 0 && oldVal.length > 0) {
+                            reset();
+                        }
+                    });
+
                     // canvas reset
                     function reset(){
                         element[0].width = element[0].width;
@@ -3222,6 +3227,8 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                         // to
                         ctx.lineTo(cX,cY);
 
+                        ctx.lineCap = 'round';
+                        
                         // stroke width
                         ctx.lineWidth = scope.strokeWidth;
 
