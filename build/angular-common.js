@@ -3210,7 +3210,11 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                     });
 
                     scope.$watch('ngModel', function(newVal, oldVal) {
-                        if (newVal.length === 0 && oldVal.length > 0) {
+                        if (!newVal && !oldVal) {
+                            return;
+                        }
+
+                        if (!newVal && oldVal) {
                             reset();
                         }
                     });
@@ -3228,7 +3232,7 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
                         ctx.lineTo(cX,cY);
 
                         ctx.lineCap = 'round';
-                        
+
                         // stroke width
                         ctx.lineWidth = scope.strokeWidth;
 
