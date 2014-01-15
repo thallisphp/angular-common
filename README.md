@@ -31,6 +31,7 @@ angular.module('app', [
     'common.print',
     'common.redactor',
     'common.skype',
+    'common.sortable',
     'common.strings',
     'common.time',
     'common.upload',
