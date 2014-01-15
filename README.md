@@ -52,14 +52,12 @@ angular.module('app', [
 ***Run these commands from the root of the repo.***
 
 - Node
-```
-node server.js
-```
+
+`node server.js`
 
 - PHP
-```
-php -S localhost:8888
-```
+
+`php -S localhost:8888`
 
 <a href='http://localhost:8000'>http://localhost:8000</a>
 
