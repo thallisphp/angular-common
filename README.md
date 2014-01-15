@@ -55,7 +55,7 @@ angular.module('app', [
 
 `php -S localhost:8888`
 
-<a href='http://localhost:8000'>http://localhost:8000</a>
+<a href='http://localhost:8888'>http://localhost:8888</a>
 
 ## Roadmap
 
