@@ -51,11 +51,7 @@ angular.module('app', [
 
 ***Run these commands from the root of the repo.***
 
-- Node
-
 `node server.js`
-
-- PHP
 
 `php -S localhost:8888`
 
