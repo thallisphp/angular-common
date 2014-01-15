@@ -13,24 +13,24 @@ module.exports = function(grunt) {
             },
             javascript: {
                 src: [
-                    './bower_components/moment/min/moment.min.js',
-                    './bower_components/lodash.min.js',
-                    './bower_components/mediaelement/build/mediaelement-and-player.min.js',
-                    './bower_components/jquery-form/jquery.form.js',
-                    './bower_components/bootstrap/dist/js/bootstrap.min.js',
-                    './bower_components/bootstrap-daterangepicker/daterangepicker.js',
-                    './bower_components/angular/angular.min.js',
+                    'bower_components/moment/min/moment.min.js',
+                    'bower_components/lodash.min.js',
+                    'bower_components/mediaelement/build/mediaelement-and-player.min.js',
+                    'bower_components/jquery-form/jquery.form.js',
+                    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+                    'bower_components/bootstrap-daterangepicker/daterangepicker.js',
+                    'bower_components/angular/angular.min.js',
 
                     'modules/**/*.js',
                     '!modules/**/*Spec.js'
                 ],
-                dest: './build/angular-common.js'
+                dest: 'build/angular-common.js'
             }
         },
         uglify: {
             dist: {
                 files: {
-                    './build/angular-common.min.js': './build/angular-common.js'
+                    'build/angular-common.min.js': 'build/angular-common.js'
                 }
             }
         },
