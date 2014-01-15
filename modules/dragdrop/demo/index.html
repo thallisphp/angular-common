@@ -7,7 +7,7 @@
                 class="ui-state-highlight"
                 ng-repeat='object in objects'
                 draggable="object"
-                draggable-target='#sortable'>
+                draggable-target='#sortable-buttons'>
                 {{ object.name }}
             </li>
         </ul>
@@ -16,7 +16,7 @@
             droppable='items'
             ng-update='updateObjects(from, to)'
             ng-create='createObject(object, to)'
-            id="sortable">
+            id="sortable-buttons">
             <li
                 class="ui-state-default"
                 ng-repeat="item in items track by item.id">

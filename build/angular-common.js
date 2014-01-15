@@ -2664,6 +2664,7 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
         'demo.print',
         'demo.progress',
         'demo.redactor',
+        'demo.sortable',
         'demo.skype',
         'demo.strings',
         'demo.time',
@@ -2690,6 +2691,7 @@ $animate:Sd,$browser:dd,$cacheFactory:ed,$controller:hd,$document:id,$exceptionH
             'print',
             'progress',
             'redactor',
+            'sortable',
             'skype',
             'strings',
             'time',
@@ -3917,6 +3919,93 @@ RedactorPlugins.fullscreen = {
     }]);
 
 })();
+
+(function() {
+
+    'use strict';
+
+    angular.module('demo.sortable', [
+        'common.sortable'
+    ])
+
+        .controller('DemoSortableCtrl', ['$scope', function($scope) {
+            $scope.users = [
+                {
+                    name: 'Michael'
+                },
+                {
+                    name: 'John'
+                },
+                {
+                    name: 'Stephen'
+                },
+                {
+                    name: 'Robbie'
+                }
+            ];
+
+            $scope.orderChange = function() {
+                console.log('Order change!');
+            };
+
+            $scope.codeExample = "<ul\n" +
+            "   sortable\n" +
+            "   ng-model='users'\n" +
+            "   ng-change='orderChange()'>\n" +
+            "   <li ng-repeat='user in users'>\n" +
+            "       {{ user.name }}\n" +
+            "   </li>\n" +
+            "</ul>";
+        }]);
+
+})();
+
+(function() {
+
+    'use strict';
+
+    angular.module('common.sortable', [])
+
+        .directive('sortable', ['$timeout', function($timeout) {
+            return {
+                scope: {
+                    ngModel: '=',
+                    ngChange: '&'
+                },
+                link: function(scope, element, attrs) {
+                    var toUpdate;
+                    var startIndex = -1;
+                    element.sortable({
+                        start: function (event, ui) {
+                            // on start we define where the item is dragged from
+                            startIndex = $(ui.item).index();
+                        },
+                        stop: function (event, ui) {
+                            // on stop we determine the new index of the
+                            // item and store it there
+                            var newIndex = $(ui.item).index();
+                            var toMove = toUpdate[startIndex];
+                            toUpdate.splice(startIndex, 1);
+                            toUpdate.splice(newIndex, 0, toMove);
+
+                            // we move items in the array, if we want
+                            // to trigger an update in angular use $apply()
+                            // since we're outside angulars lifecycle
+                            $timeout(function() {
+                                scope.ngChange();
+                            });
+                        }
+                    });
+
+                    $timeout(function() {
+                        toUpdate = scope.ngModel;
+                    });
+                }
+            }
+        }]);
+
+})();
+
 
 (function() {
 
